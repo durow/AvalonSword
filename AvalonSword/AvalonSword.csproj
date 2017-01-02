@@ -40,10 +40,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DefaultLocator.cs" />
-    <Compile Include="IConfig.cs" />
-    <Compile Include="ILocator.cs" />
-    <Compile Include="IServiceContainer.cs" />
-    <Compile Include="IViewModelContainer.cs" />
+    <Compile Include="Abstraction\IConfig.cs" />
+    <Compile Include="Abstraction\ILocator.cs" />
+    <Compile Include="Abstraction\IServiceContainer.cs" />
+    <Compile Include="Abstraction\IViewModelContainer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="XmlConfig.cs" />
   </ItemGroup>
