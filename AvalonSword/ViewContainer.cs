@@ -4,6 +4,7 @@
  * Date:2017.02.12
  */
 
+using Ayx.AvalonSword.Abstraction;
 using System;
 using System.Collections.Generic;
 using System.Windows;
@@ -43,7 +44,7 @@ namespace Ayx.AvalonSword
             var view = serviceContainer.GetService<TView>();
             var vmType = GetViewModel<TView>();
             if (vmType == null) return view;
-
+            
             var vm = serviceContainer.GetService(vmType);
             view.DataContext = vm;
             return view;
