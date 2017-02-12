@@ -30,6 +30,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -37,14 +39,16 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DefaultLocator.cs" />
     <Compile Include="Abstraction\IConfig.cs" />
     <Compile Include="Abstraction\ILocator.cs" />
     <Compile Include="Abstraction\IServiceContainer.cs" />
-    <Compile Include="Abstraction\IViewModelContainer.cs" />
+    <Compile Include="Abstraction\IViewContainer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewContainer.cs" />
     <Compile Include="XmlConfig.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

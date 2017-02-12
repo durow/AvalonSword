@@ -1,8 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
+﻿/*
+ * Author:durow
+ * interface of ServiceContainer
+ * Date:2017.02.12
+ */
+
+using System;
 
 namespace Ayx.AvalonSword
 {
@@ -11,5 +13,6 @@ namespace Ayx.AvalonSword
         void Add<TInterface, TService>();
         void AddSingleton<TInterface, TService>(TService service);
         TInterface GetService<TInterface>();
+        object GetService(Type type);
     }
 }

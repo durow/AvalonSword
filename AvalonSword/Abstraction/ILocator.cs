@@ -9,7 +9,7 @@ namespace Ayx.AvalonSword
     {
         IConfig Config { get; set; }
         IServiceContainer ServiceContainer { get; set; }
-        IViewModelContainer VmContainer { get; set; }
+        IViewContainer VmContainer { get; set; }
 
         T GetService<T>();
         object GetViewModel<TView>();
