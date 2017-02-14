@@ -7,6 +7,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AvalonSword", "AvalonSword.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AvalonSwordTests", "..\AvalonSwordTests\AvalonSwordTests.csproj", "{B7214B39-E1C9-414F-AD4E-155B803A5C3E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AvalonSword.Ninject", "..\AvalonSword.Ninject\AvalonSword.Ninject.csproj", "{A056A227-6970-45EA-9121-881677D9D84C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{FD919FFA-15BD-49E2-9523-3F1D805A3EC4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfSample", "..\Samples\WpfSample\WpfSample.csproj", "{48C11A76-563B-4C5E-8176-3C3BAB67033F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,8 +27,19 @@ Global
 		{B7214B39-E1C9-414F-AD4E-155B803A5C3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B7214B39-E1C9-414F-AD4E-155B803A5C3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B7214B39-E1C9-414F-AD4E-155B803A5C3E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A056A227-6970-45EA-9121-881677D9D84C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A056A227-6970-45EA-9121-881677D9D84C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A056A227-6970-45EA-9121-881677D9D84C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A056A227-6970-45EA-9121-881677D9D84C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48C11A76-563B-4C5E-8176-3C3BAB67033F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48C11A76-563B-4C5E-8176-3C3BAB67033F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48C11A76-563B-4C5E-8176-3C3BAB67033F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48C11A76-563B-4C5E-8176-3C3BAB67033F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{48C11A76-563B-4C5E-8176-3C3BAB67033F} = {FD919FFA-15BD-49E2-9523-3F1D805A3EC4}
 	EndGlobalSection
 EndGlobal
