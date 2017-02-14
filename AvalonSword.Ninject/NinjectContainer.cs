@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Ayx.AvalonSword.Abstraction;
 using Ninject;
 
-namespace AvalonSword.Ninject
+namespace Ayx.AvalonSword.Ninject
 {
     public class NinjectContainer : IServiceContainer
     {

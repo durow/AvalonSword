@@ -13,6 +13,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{FD91
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfSample", "..\Samples\WpfSample\WpfSample.csproj", "{48C11A76-563B-4C5E-8176-3C3BAB67033F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AvalonSword.NLog", "AvalonSword.NLog\AvalonSword.NLog.csproj", "{00C35EC6-82FE-4B11-A65C-58A2EE8102C3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +37,10 @@ Global
 		{48C11A76-563B-4C5E-8176-3C3BAB67033F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{48C11A76-563B-4C5E-8176-3C3BAB67033F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{48C11A76-563B-4C5E-8176-3C3BAB67033F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{00C35EC6-82FE-4B11-A65C-58A2EE8102C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00C35EC6-82FE-4B11-A65C-58A2EE8102C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00C35EC6-82FE-4B11-A65C-58A2EE8102C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00C35EC6-82FE-4B11-A65C-58A2EE8102C3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

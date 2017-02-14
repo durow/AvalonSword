@@ -1,4 +1,4 @@
-﻿using AvalonSword.Ninject;
+﻿using Ayx.AvalonSword.Ninject;
 using Ayx.AvalonSword;
 using Ninject;
 using System;
@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WpfSample.ViewModels;
+using WpfSample.Views;
 
 namespace WpfSample
 {
@@ -31,6 +32,7 @@ namespace WpfSample
         static void BindViews(IViewContainer container)
         {
             container.BindView<MainWindow, MainWindowViewModel>();
+            container.BindView<TestView, TestViewModel>();
         }
     }
 }

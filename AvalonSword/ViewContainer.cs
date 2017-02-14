@@ -42,7 +42,7 @@ namespace Ayx.AvalonSword
         public TView CreateView<TView>() where TView : FrameworkElement
         {
             var view = serviceContainer.GetService<TView>();
-            var vmType = GetViewModel<TView>();
+            var vmType = GetViewModelFromView<TView>();
             if (vmType == null) return view;
             
             var vm = serviceContainer.GetService(vmType);
@@ -54,7 +54,7 @@ namespace Ayx.AvalonSword
         {
             var vmType = typeof(TViewModel);
             if (!VMList.ContainsKey(vmType))
-                throw new Exception($"can't find view from viewmodel {nameof(vmType)}");
+                throw new Exception($"can't find view from viewmodel {vmType}");
 
             var vm = serviceContainer.GetService<TViewModel>();
             var view = serviceContainer.GetService(VMList[vmType]) as FrameworkElement;
@@ -64,7 +64,7 @@ namespace Ayx.AvalonSword
 
         public void RemoveView<TView>() where TView : FrameworkElement
         {
-            var vmType = GetViewModel<TView>();
+            var vmType = GetViewModelFromView<TView>();
             if(vmType != null)
             {
                 VMList.Remove(vmType);
@@ -80,7 +80,7 @@ namespace Ayx.AvalonSword
 
         public bool ContainsView<TView>() where TView : FrameworkElement
         {
-            return GetViewModel<TView>() != null;
+            return GetViewModelFromView<TView>() != null;
         }
 
         public bool ContainsViewModel<TViewModel>() where TViewModel : class
@@ -88,7 +88,7 @@ namespace Ayx.AvalonSword
             return VMList.ContainsKey(typeof(TViewModel));
         }
 
-        private Type GetViewModel<TView>()
+        private Type GetViewModelFromView<TView>()
         {
             foreach (var vm in VMList)
             {

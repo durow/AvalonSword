@@ -8,7 +8,11 @@
         Title="MainWindow" Height="550" Width="825">
     <DockPanel>
         <WrapPanel DockPanel.Dock="Top">
-            <Button Content="OpenView" Width="90" Command="{Binding CmdTestView}"/>
+            <Button Content="AddText" Width="90" Command="{Binding CmdAddText}"/>
+            <Button Content="OpenView" Width="90" Command="{Binding CmdOpenView}"/>
+            <Button Content="RouterTest" Width="90" Command="{Binding Router}" CommandParameter="RouterTest"/>
+            <Button Content="RouterTest2" Width="90" Command="{Binding Router}" CommandParameter="RouterTest2"/>
+            <CheckBox IsChecked="{Binding CanRouterTest}" VerticalAlignment="Center" Content="CanRouterTest"/>
         </WrapPanel>
         <TextBox Text="{Binding ResultText}"/>
     </DockPanel>
