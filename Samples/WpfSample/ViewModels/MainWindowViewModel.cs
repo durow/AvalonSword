@@ -1,4 +1,5 @@
-﻿using Ayx.AvalonSword.MVVM;
+﻿using Ayx.AvalonSword;
+using Ayx.AvalonSword.MVVM;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,13 +39,20 @@ namespace WpfSample.ViewModels
             }
         }
 
+        private IViewContainer viewContainer;
+
+        public MainWindowViewModel(IViewContainer container)
+        {
+            viewContainer = container;
+        }
+
 
         public AyxCommand CmdOpenView
         {
             get
             {
                 return CmdGenerator.GetCmd(o=>{
-                    MessageBox.Show("new window!");
+                    viewContainer.ShowWindowFromModel<TestViewModel>(View as Window);
                 });
             }
         }

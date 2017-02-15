@@ -4,12 +4,16 @@
  * Date:2017.02.14
  */
 
+using System;
+using System.Windows;
+
 namespace Ayx.AvalonSword.MVVM
 {
     public abstract class ViewModelBase : NotificationObject
     {
         protected CommandGenerator CmdGenerator = new CommandGenerator();
-        public CommandRouter CommandRouter;
+        public CommandRouter CommandRouter { get; set; }
+        public FrameworkElement View { get; set; }
 
         private AyxCommand _router;
         public AyxCommand Router
@@ -27,6 +31,15 @@ namespace Ayx.AvalonSword.MVVM
                     });
                 return _router;
             }
+        }
+
+        protected TViewModel GetViewModel<TViewModel>(FrameworkElement view)
+            where TViewModel : class
+        {
+            if (view.DataContext == null)
+                return null;
+
+            return (TViewModel)view.DataContext;
         }
     }
 }

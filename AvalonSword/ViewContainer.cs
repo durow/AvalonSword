@@ -39,6 +39,7 @@ namespace Ayx.AvalonSword
             if (vmType == null) return view;
 
             var vm = serviceContainer.GetService(vmType);
+            AddViewToVM(view, vm, vmType);
             view.DataContext = vm;
             return view;
         }
@@ -52,6 +53,7 @@ namespace Ayx.AvalonSword
 
             var vm = serviceContainer.GetService<TViewModel>();
             var view = serviceContainer.GetService(VMList[vmType]) as FrameworkElement;
+            AddViewToVM(view, vm, vmType);
             view.DataContext = vm;
             return view;
         }
@@ -69,6 +71,7 @@ namespace Ayx.AvalonSword
             where TViewModel : class
         {
             var view = serviceContainer.GetService<TView>();
+            AddViewToVM(view, viewmodel, viewmodel.GetType());
             view.DataContext = viewmodel;
             return view;
         }
@@ -258,6 +261,13 @@ namespace Ayx.AvalonSword
             return win;
         }
 
+        private void AddViewToVM(FrameworkElement view, object vm, Type vmType)
+        {
+            var property = vmType.GetProperty("View");
+            if (property == null) return;
+
+            property.SetValue(vm, view, null);
+        }
         #endregion
 
     }
