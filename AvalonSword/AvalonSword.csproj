@@ -52,7 +52,6 @@
     <Compile Include="Abstraction\IServiceContainer.cs" />
     <Compile Include="Abstraction\ITabViewManager.cs" />
     <Compile Include="Abstraction\IViewContainer.cs" />
-    <Compile Include="Abstraction\IViewManager.cs" />
     <Compile Include="AppManager.cs" />
     <Compile Include="MVVM\AyxCommand.cs" />
     <Compile Include="MVVM\AyxCommandGeneric.cs" />
