@@ -51,7 +51,7 @@
     <Compile Include="Abstraction\INavigationManager.cs" />
     <Compile Include="Abstraction\IServiceContainer.cs" />
     <Compile Include="Abstraction\ITabViewManager.cs" />
-    <Compile Include="Abstraction\IViewContainer.cs" />
+    <Compile Include="Abstraction\IViewManager.cs" />
     <Compile Include="AppManager.cs" />
     <Compile Include="MVVM\AyxCommand.cs" />
     <Compile Include="MVVM\AyxCommandGeneric.cs" />
@@ -61,7 +61,8 @@
     <Compile Include="MVVM\NotificationObject.cs" />
     <Compile Include="MVVM\ViewModelBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewContainer.cs" />
+    <Compile Include="TabItemManager.cs" />
+    <Compile Include="ViewManager.cs" />
     <Compile Include="XmlConfig.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

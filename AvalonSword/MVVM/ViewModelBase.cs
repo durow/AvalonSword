@@ -4,7 +4,6 @@
  * Date:2017.02.14
  */
 
-using System;
 using System.Windows;
 
 namespace Ayx.AvalonSword.MVVM

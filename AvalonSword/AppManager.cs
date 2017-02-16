@@ -12,7 +12,7 @@ namespace Ayx.AvalonSword
     public class AppManager
     {
         public IServiceContainer ServiceContainer { get; private set; }
-        public IViewContainer ViewContainer { get; set; }
+        public IViewManager ViewContainer { get; set; }
 
         public AppManager(IServiceContainer serviceContainer)
         {
@@ -20,7 +20,7 @@ namespace Ayx.AvalonSword
                 throw new NullReferenceException($"ServiceContainer can't be null!");
 
             ServiceContainer = serviceContainer;
-            ViewContainer = new ViewContainer(serviceContainer);
+            ViewContainer = new ViewManager(serviceContainer);
             ServiceContainer.AddSingleton(ViewContainer);
             ServiceContainer.AddSingleton(ServiceContainer);
         }

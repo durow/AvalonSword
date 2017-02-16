@@ -1,4 +1,5 @@
 ﻿using Ayx.AvalonSword;
+using Ayx.AvalonSword.Abstraction;
 using Ayx.AvalonSword.MVVM;
 using System;
 using System.Collections.Generic;
@@ -6,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace WpfSample.ViewModels
 {
@@ -39,11 +41,14 @@ namespace WpfSample.ViewModels
             }
         }
 
-        private IViewContainer viewContainer;
+        public ITabViewManager TabViewManager { get; set; }
 
-        public MainWindowViewModel(IViewContainer container)
+        private IViewManager viewManager;
+
+        public MainWindowViewModel(IViewManager viewManager, ITabViewManager tabManager)
         {
-            viewContainer = container;
+            this.viewManager = viewManager;
+            this.TabViewManager = tabManager;
         }
 
 
@@ -52,7 +57,7 @@ namespace WpfSample.ViewModels
             get
             {
                 return CmdGenerator.GetCmd(o=>{
-                    viewContainer.ShowWindowFromModel<TestViewModel>(View as Window);
+                    TabViewManager.AddTabFromModel<TestControlViewModel>("OpenView");
                 });
             }
         }
@@ -63,14 +68,14 @@ namespace WpfSample.ViewModels
             {
                 return CmdGenerator.GetCmd(o=>
                 {
-                    ResultText += $"[{DateTime.Now}] from CommandGenerator!\n";
+                    TabViewManager.AddTabFromModel<TestControlViewModel>("AddText");
                 });
             }
         }
 
         public void RouterTest()
         {
-            ResultText += $"[{DateTime.Now}] from Router RouterTest!\n";
+            TabViewManager.AddTabFromModel<TestControlViewModel>("RouterTest");
         }
 
         public bool RouterTestCheck()
@@ -80,7 +85,17 @@ namespace WpfSample.ViewModels
 
         public void RouterTest2()
         {
-            ResultText += $"[{DateTime.Now}] from Router RouterTest2!\n";
+            TabViewManager.AddTabFromModel<TestControlViewModel>("RouterTest2");
+        }
+
+        public void ShowPreview()
+        {
+            TabViewManager.ShowPreview();
+        }
+
+        public void ShowNext()
+        {
+            TabViewManager.ShowNext();
         }
     }
 }

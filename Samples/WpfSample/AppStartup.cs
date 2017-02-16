@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using WpfSample.ViewModels;
 using WpfSample.Views;
+using Ayx.AvalonSword.Abstraction;
+using System.Windows.Controls;
 
 namespace WpfSample
 {
@@ -26,13 +28,14 @@ namespace WpfSample
 
         static void BindServices(StandardKernel kernel)
         {
-
+            kernel.Bind<ITabViewManager>().To<TabItemManager>();
         }
 
-        static void BindViews(IViewContainer container)
+        static void BindViews(IViewManager container)
         {
             container.BindView<MainWindow, MainWindowViewModel>();
             container.BindView<TestView, TestViewModel>();
+            container.BindView<TestControl, TestControlViewModel>();
         }
     }
 }

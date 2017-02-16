@@ -11,7 +11,7 @@ using System.Windows;
 
 namespace Ayx.AvalonSword
 {
-    public class ViewContainer : IViewContainer
+    public class ViewManager : IViewManager
     {
         private Dictionary<Type, Type> VMList = new Dictionary<Type, Type>();
         private IServiceContainer serviceContainer;
@@ -24,7 +24,7 @@ namespace Ayx.AvalonSword
             }
         }
 
-        public ViewContainer(IServiceContainer serviceContainer)
+        public ViewManager(IServiceContainer serviceContainer)
         {
             this.serviceContainer = serviceContainer;
         }
@@ -34,14 +34,12 @@ namespace Ayx.AvalonSword
         public TView CreateView<TView>()
             where TView : FrameworkElement
         {
-            var view = serviceContainer.GetService<TView>();
-            var vmType = GetViewModelFromView<TView>();
-            if (vmType == null) return view;
+            var viewType = typeof(TView);
+            var vmType = GetViewModelFromView(viewType);
+            if (vmType == null)
+                return serviceContainer.GetService<TView>();
 
-            var vm = serviceContainer.GetService(vmType);
-            AddViewToVM(view, vm, vmType);
-            view.DataContext = vm;
-            return view;
+            return CreateView(viewType, vmType) as TView;
         }
 
         public FrameworkElement CreateViewFromModel<TViewModel>()
@@ -51,11 +49,17 @@ namespace Ayx.AvalonSword
             if (!VMList.ContainsKey(vmType))
                 throw new Exception($"can't find view from viewmodel {vmType}");
 
-            var vm = serviceContainer.GetService<TViewModel>();
-            var view = serviceContainer.GetService(VMList[vmType]) as FrameworkElement;
-            AddViewToVM(view, vm, vmType);
-            view.DataContext = vm;
-            return view;
+            return CreateView(VMList[vmType], vmType);
+        }
+
+        public FrameworkElement CreateViewFromModel<TViewModel>(TViewModel vm)
+            where TViewModel : class
+        {
+            var vmType = typeof(TViewModel);
+            if (!VMList.ContainsKey(vmType))
+                throw new Exception($"can't find view from viewmodel {vmType}");
+
+            return CreateView(VMList[vmType], vmType, vm);
         }
 
         public TView CreateView<TView, TViewModel>()
@@ -70,10 +74,7 @@ namespace Ayx.AvalonSword
             where TView : FrameworkElement
             where TViewModel : class
         {
-            var view = serviceContainer.GetService<TView>();
-            AddViewToVM(view, viewmodel, viewmodel.GetType());
-            view.DataContext = viewmodel;
-            return view;
+            return CreateView(typeof(TView), typeof(TViewModel)) as TView;
         }
 
         #endregion
@@ -90,6 +91,12 @@ namespace Ayx.AvalonSword
         public Window CreateWindowFromModel<TViewModel>() where TViewModel : class
         {
             var view = CreateViewFromModel<TViewModel>();
+            return ConvertToWindow(view);
+        }
+
+        public Window CreateWindowFromModel<TViewModel>(TViewModel viewmodel) where TViewModel : class
+        {
+            var view = CreateViewFromModel<TViewModel>(viewmodel);
             return ConvertToWindow(view);
         }
 
@@ -124,6 +131,15 @@ namespace Ayx.AvalonSword
             where TViewModel : class
         {
             var win = CreateWindowFromModel<TViewModel>();
+            win.Owner = owner;
+            win.Show();
+            return win;
+        }
+
+        public Window ShowWindowFromModel<TViewModel>(TViewModel viewmodel, Window owner = null)
+            where TViewModel : class
+        {
+            var win = CreateWindowFromModel<TViewModel>(viewmodel);
             win.Owner = owner;
             win.Show();
             return win;
@@ -169,6 +185,15 @@ namespace Ayx.AvalonSword
             return win;
         }
 
+        public Window ShowDialogFromModel<TViewModel>(TViewModel viewmodel, Window owner = null)
+            where TViewModel : class
+        {
+            var win = CreateWindowFromModel<TViewModel>(viewmodel);
+            win.Owner = owner;
+            win.ShowDialog();
+            return win;
+        }
+
         public TView ShowDialog<TView, TViewModel>(Window owner = null)
             where TView : Window
             where TViewModel : class
@@ -192,6 +217,7 @@ namespace Ayx.AvalonSword
         #endregion
 
         #region OtherMethos
+
         public void BindView<TView, TViewModel>()
             where TView : FrameworkElement
             where TViewModel : class
@@ -199,13 +225,14 @@ namespace Ayx.AvalonSword
             var vmType = typeof(TViewModel);
             if (VMList.ContainsKey(vmType))
                 throw new Exception($"{nameof(vmType)} have binded!");
+
             VMList.Add(vmType, typeof(TView));
         }
 
         public void RemoveView<TView>()
             where TView : FrameworkElement
         {
-            var vmType = GetViewModelFromView<TView>();
+            var vmType = GetViewModelFromView(typeof(TView));
             if (vmType != null)
             {
                 VMList.Remove(vmType);
@@ -223,7 +250,7 @@ namespace Ayx.AvalonSword
         public bool ContainsView<TView>()
             where TView : FrameworkElement
         {
-            return GetViewModelFromView<TView>() != null;
+            return GetViewModelFromView(typeof(TView)) != null;
         }
 
         public bool ContainsViewModel<TViewModel>()
@@ -234,18 +261,18 @@ namespace Ayx.AvalonSword
 
         public TViewModel GetViewModel<TViewModel>() where TViewModel : class
         {
-            throw new NotImplementedException();
+            return serviceContainer.GetService<TViewModel>();
         }
 
         #endregion
 
         #region PrivateMethods
 
-        private Type GetViewModelFromView<TView>()
+        private Type GetViewModelFromView(Type viewType)
         {
             foreach (var vm in VMList)
             {
-                if (vm.Value == typeof(TView))
+                if (vm.Value == viewType)
                     return vm.Key;
             }
 
@@ -268,6 +295,19 @@ namespace Ayx.AvalonSword
 
             property.SetValue(vm, view, null);
         }
+
+        private FrameworkElement CreateView(Type viewType, Type vmType, object vm = null)
+        {
+            var view = serviceContainer.GetService(viewType) as FrameworkElement;
+            if (vm == null)
+                vm = serviceContainer.GetService(vmType);
+
+            AddViewToVM(view, vm, vmType);
+            view.DataContext = vm;
+
+            return view;
+        }
+
         #endregion
 
     }

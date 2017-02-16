@@ -12,8 +12,12 @@
             <Button Content="OpenView" Width="90" Command="{Binding CmdOpenView}"/>
             <Button Content="RouterTest" Width="90" Command="{Binding Router}" CommandParameter="RouterTest"/>
             <Button Content="RouterTest2" Width="90" Command="{Binding Router}" CommandParameter="RouterTest2"/>
+            <Button Content="Preview" Width="90" Command="{Binding Router}" CommandParameter="ShowPreview"/>
+            <Button Content="Nex" Width="90" Command="{Binding Router}" CommandParameter="ShowNext"/>
             <CheckBox IsChecked="{Binding CanRouterTest}" VerticalAlignment="Center" Content="CanRouterTest"/>
         </WrapPanel>
-        <TextBox Text="{Binding ResultText}"/>
+        <TabControl x:Name="TabTest" ItemsSource="{Binding TabViewManager.TabItems}"
+                    SelectedItem="{Binding TabViewManager.SelectedItem}">
+        </TabControl>
     </DockPanel>
 </Window>

@@ -8,13 +8,16 @@ using System.Windows;
 
 namespace Ayx.AvalonSword
 {
-    public interface IViewContainer
+    public interface IViewManager
     {
         int Count { get; }
 
         #region CreateView
 
         FrameworkElement CreateViewFromModel<TViewModel>()
+            where TViewModel : class;
+
+        FrameworkElement CreateViewFromModel<TViewModel>(TViewModel viewmodel)
             where TViewModel : class;
 
         TView CreateView<TView>() 
@@ -38,6 +41,9 @@ namespace Ayx.AvalonSword
         Window CreateWindowFromModel<TViewModel>()
             where TViewModel : class;
 
+        Window CreateWindowFromModel<TViewModel>(TViewModel viewmodel)
+            where TViewModel : class;
+
         TView CreateWindow<TView, TViewModel>()
             where TView : Window
             where TViewModel : class;
@@ -56,6 +62,9 @@ namespace Ayx.AvalonSword
         Window ShowWindowFromModel<TViewModel>(Window owner = null)
             where TViewModel : class;
 
+        Window ShowWindowFromModel<TViewModel>(TViewModel viewmodel, Window owner = null)
+            where TViewModel : class;
+
         TView ShowWindow<TView, TViewModel>(Window owner = null) 
             where TView : Window 
             where TViewModel : class;
@@ -72,6 +81,9 @@ namespace Ayx.AvalonSword
             where TView : Window;
 
         Window ShowDialogFromModel<TViewModel>(Window owner = null)
+            where TViewModel : class;
+
+        Window ShowDialogFromModel<TViewModel>(TViewModel viewmodel, Window owner = null)
             where TViewModel : class;
 
         TView ShowDialog<TView, TViewModel>(Window owner = null)
