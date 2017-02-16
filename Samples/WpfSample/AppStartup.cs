@@ -28,7 +28,7 @@ namespace WpfSample
 
         static void BindServices(StandardKernel kernel)
         {
-            kernel.Bind<ITabViewManager>().To<TabItemManager>();
+            kernel.Bind<IBindedTabManager>().To<BindedTabManager>();
         }
 
         static void BindViews(IViewManager container)

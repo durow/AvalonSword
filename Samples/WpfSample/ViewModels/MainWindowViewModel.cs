@@ -41,11 +41,11 @@ namespace WpfSample.ViewModels
             }
         }
 
-        public ITabViewManager TabViewManager { get; set; }
+        public IBindedTabManager TabViewManager { get; set; }
 
         private IViewManager viewManager;
 
-        public MainWindowViewModel(IViewManager viewManager, ITabViewManager tabManager)
+        public MainWindowViewModel(IViewManager viewManager, IBindedTabManager tabManager)
         {
             this.viewManager = viewManager;
             this.TabViewManager = tabManager;

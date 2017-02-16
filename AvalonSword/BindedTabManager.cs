@@ -10,7 +10,7 @@ using Ayx.AvalonSword.MVVM;
 
 namespace Ayx.AvalonSword
 {
-    public class TabItemManager : NotificationObject, ITabViewManager
+    public class BindedTabManager : NotificationObject, IBindedTabManager
     {
         private IViewManager viewManager;
         private object _selectedItem;
@@ -29,7 +29,7 @@ namespace Ayx.AvalonSword
 
         public ObservableCollection<object> TabItems { get; set; }
 
-        public TabItemManager(IViewManager viewManager)
+        public BindedTabManager(IViewManager viewManager)
         {
             this.viewManager = viewManager;
             TabItems = new ObservableCollection<object>();
@@ -81,6 +81,10 @@ namespace Ayx.AvalonSword
         {
             var item = GetTabItem(title);
             TabItems.Remove(item);
+        }
+        public void CloseTab(object content)
+        {
+            TabItems.Remove(content);
         }
 
         public FrameworkElement GetTabContent(string title)
