@@ -54,6 +54,7 @@
     <Compile Include="Abstraction\IViewManager.cs" />
     <Compile Include="AppManager.cs" />
     <Compile Include="Abstraction\ITabManager.cs" />
+    <Compile Include="Abstraction\IUserAuthentication.cs" />
     <Compile Include="MVVM\AyxCommand.cs" />
     <Compile Include="MVVM\AyxCommandGeneric.cs" />
     <Compile Include="MVVM\AyxEventCommand.cs" />
@@ -63,6 +64,7 @@
     <Compile Include="MVVM\ViewModelBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BindedTabManager.cs" />
+    <Compile Include="UserAuthentication.cs" />
     <Compile Include="ViewManager.cs" />
     <Compile Include="XmlConfig.cs" />
   </ItemGroup>

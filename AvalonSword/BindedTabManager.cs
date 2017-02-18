@@ -1,8 +1,5 @@
 ﻿using Ayx.AvalonSword.Abstraction;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows.Controls;
 using System.Collections.ObjectModel;
 using System.Windows;
@@ -120,6 +117,8 @@ namespace Ayx.AvalonSword
 
         public object ShowNext()
         {
+            if (TabItems.Count == 0) return null;
+
             var index = TabItems.IndexOf(SelectedItem);
             index = ++index % TabItems.Count;
             SelectedItem = TabItems[index];
@@ -128,6 +127,8 @@ namespace Ayx.AvalonSword
 
         public object ShowPreview()
         {
+            if(TabItems.Count == 0) return null;
+
             var index = TabItems.IndexOf(SelectedItem);
             index--;
             if (index < 0)
