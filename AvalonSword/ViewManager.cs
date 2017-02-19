@@ -261,7 +261,13 @@ namespace Ayx.AvalonSword
 
         public TViewModel GetViewModel<TViewModel>() where TViewModel : class
         {
-            return serviceContainer.GetService<TViewModel>();
+            return GetViewModel(typeof(TViewModel)) as TViewModel;
+        }
+
+        public object GetViewModel(Type vmType)
+        {
+            var vm = serviceContainer.GetService(vmType);
+            return SetCommandAop(vm);
         }
 
         #endregion
@@ -300,12 +306,17 @@ namespace Ayx.AvalonSword
         {
             var view = serviceContainer.GetService(viewType) as FrameworkElement;
             if (vm == null)
-                vm = serviceContainer.GetService(vmType);
+                vm = GetViewModel(vmType);
 
             AddViewToVM(view, vm, vmType);
             view.DataContext = vm;
 
             return view;
+        }
+
+        private object SetCommandAop(object vm)
+        {
+            return vm;
         }
 
         #endregion

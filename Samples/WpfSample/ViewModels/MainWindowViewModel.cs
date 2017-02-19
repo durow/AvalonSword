@@ -11,7 +11,7 @@ using System.Windows.Controls;
 
 namespace WpfSample.ViewModels
 {
-    public class MainWindowViewModel:ViewModelBase
+    public class MainWindowViewModel : ViewModelBase
     {
         private string _resultText;
         public string ResultText
@@ -19,27 +19,23 @@ namespace WpfSample.ViewModels
             get { return _resultText; }
             set
             {
-                if(value != _resultText)
+                if (value != _resultText)
                 {
                     _resultText = value;
-                    NotifyPropertyChanged("ResultText");
+                    RaisePropertyChanged(() => ResultText);
                 }
             }
         }
 
+
         private bool _canRouterTest;
+
         public bool CanRouterTest
         {
             get { return _canRouterTest; }
-            set
-            {
-                if(value != _canRouterTest)
-                {
-                    _canRouterTest = value;
-                    NotifyPropertyChanged("CanRouterTest");
-                }
-            }
+            set { _canRouterTest = value; RaisePropertyChanged("CanRouterTest"); }
         }
+
 
         public IBindedTabManager TabViewManager { get; set; }
 
@@ -56,17 +52,28 @@ namespace WpfSample.ViewModels
         {
             get
             {
-                return CmdGenerator.GetCmd(o=>{
+                return CmdGenerator.GetCmd(o =>
+                {
                     TabViewManager.AddTabFromModel<TestControlViewModel>("OpenView");
                 });
             }
         }
 
+        public AyxCommand CmdFuck
+        {
+            get
+            {
+                return CmdGenerator.GetCmd(o =>
+                { });
+            }
+        }
+
+
         public AyxCommand CmdAddText
         {
             get
             {
-                return CmdGenerator.GetCmd(o=>
+                return CmdGenerator.GetCmd(o =>
                 {
                     TabViewManager.AddTabFromModel<TestControlViewModel>("AddText");
                 });

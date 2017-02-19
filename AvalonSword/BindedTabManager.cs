@@ -19,7 +19,7 @@ namespace Ayx.AvalonSword
                 if (_selectedItem != value)
                 {
                     _selectedItem = value;
-                    NotifyPropertyChanged("SelectedItem");
+                    RaisePropertyChanged("SelectedItem");
                 }
             }
         }

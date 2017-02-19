@@ -1,4 +1,10 @@
-﻿using System.Collections.Generic;
+﻿/*
+ * Author:durow
+ * user and authentication
+ * Date:2017.02.12
+ */
+
+using System.Collections.Generic;
 
 namespace Ayx.AvalonSword
 {

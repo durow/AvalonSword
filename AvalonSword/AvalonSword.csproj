@@ -55,6 +55,8 @@
     <Compile Include="AppManager.cs" />
     <Compile Include="Abstraction\ITabManager.cs" />
     <Compile Include="Abstraction\IUserAuthentication.cs" />
+    <Compile Include="Attributes\BeforeCommandAttribute.cs" />
+    <Compile Include="Converters\BoolVisibilityConverter.cs" />
     <Compile Include="MVVM\AyxCommand.cs" />
     <Compile Include="MVVM\AyxCommandGeneric.cs" />
     <Compile Include="MVVM\AyxEventCommand.cs" />
