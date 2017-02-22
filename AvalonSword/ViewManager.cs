@@ -55,7 +55,7 @@ namespace Ayx.AvalonSword
         public FrameworkElement CreateViewFromModel<TViewModel>(TViewModel vm)
             where TViewModel : class
         {
-            var vmType = typeof(TViewModel);
+            var vmType = vm.GetType();
             if (!VMList.ContainsKey(vmType))
                 throw new Exception($"can't find view from viewmodel {vmType}");
 
@@ -122,7 +122,9 @@ namespace Ayx.AvalonSword
             where TView : Window
         {
             var win = CreateWindow<TView>();
-            win.Owner = owner;
+            if(owner != null)
+                win.Owner = owner;
+
             win.Show();
             return win;
         }
@@ -131,7 +133,9 @@ namespace Ayx.AvalonSword
             where TViewModel : class
         {
             var win = CreateWindowFromModel<TViewModel>();
-            win.Owner = owner;
+            if (owner != null)
+                win.Owner = owner;
+
             win.Show();
             return win;
         }
@@ -140,7 +144,9 @@ namespace Ayx.AvalonSword
             where TViewModel : class
         {
             var win = CreateWindowFromModel<TViewModel>(viewmodel);
-            win.Owner = owner;
+            if (owner != null)
+                win.Owner = owner;
+
             win.Show();
             return win;
         }
@@ -150,7 +156,9 @@ namespace Ayx.AvalonSword
            where TViewModel : class
         {
             var win = CreateWindow<TView, TViewModel>();
-            win.Owner = owner;
+            if (owner != null)
+                win.Owner = owner;
+
             win.Show();
             return win;
         }
@@ -160,7 +168,9 @@ namespace Ayx.AvalonSword
             where TViewModel : class
         {
             var win = CreateWindow<TView, TViewModel>(viewmodel);
-            win.Owner = owner;
+            if (owner != null)
+                win.Owner = owner;
+
             win.Show();
             return win;
         }
@@ -171,7 +181,9 @@ namespace Ayx.AvalonSword
             where TView : Window
         {
             var win = CreateWindow<TView>();
-            win.Owner = owner;
+            if (owner != null)
+                win.Owner = owner;
+
             win.ShowDialog();
             return win;
         }
@@ -180,7 +192,9 @@ namespace Ayx.AvalonSword
             where TViewModel : class
         {
             var win = CreateWindowFromModel<TViewModel>();
-            win.Owner = owner;
+            if (owner != null)
+                win.Owner = owner;
+
             win.ShowDialog();
             return win;
         }
@@ -189,7 +203,9 @@ namespace Ayx.AvalonSword
             where TViewModel : class
         {
             var win = CreateWindowFromModel<TViewModel>(viewmodel);
-            win.Owner = owner;
+            if (owner != null)
+                win.Owner = owner;
+
             win.ShowDialog();
             return win;
         }
@@ -199,7 +215,9 @@ namespace Ayx.AvalonSword
             where TViewModel : class
         {
             var win = CreateWindow<TView, TViewModel>();
-            win.Owner = owner;
+            if (owner != null)
+                win.Owner = owner;
+
             win.ShowDialog();
             return win;
         }
@@ -209,7 +227,9 @@ namespace Ayx.AvalonSword
             where TViewModel : class
         {
             var win = CreateWindow<TView, TViewModel>(viewmodel);
-            win.Owner = owner;
+            if (owner != null)
+                win.Owner = owner;
+
             win.ShowDialog();
             return win;
         }

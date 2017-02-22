@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A2E1BC50-F95A-47DD-902B-9E492AC78BE1}</ProjectGuid>
+    <ProjectGuid>{A16A0B93-38E5-45CD-A193-A8E0A5DAAF54}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Ayx.AvalonSword</RootNamespace>
-    <AssemblyName>AvalonSword</AssemblyName>
+    <RootNamespace>WpfSample.Infrastructure</RootNamespace>
+    <AssemblyName>WpfSample.Infrastructure</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,53 +30,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Dlls\System.Windows.Interactivity.dll</HintPath>
-    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Abstraction\IConfig.cs" />
-    <Compile Include="Abstraction\ILogger.cs" />
-    <Compile Include="Abstraction\INavigationManager.cs" />
-    <Compile Include="Abstraction\IServiceContainer.cs" />
-    <Compile Include="Abstraction\IBindedTabManager.cs" />
-    <Compile Include="Abstraction\IViewManager.cs" />
-    <Compile Include="Locator.cs" />
-    <Compile Include="Abstraction\ITabManager.cs" />
-    <Compile Include="Abstraction\IUserAuthentication.cs" />
-    <Compile Include="Attributes\BeforeCommandAttribute.cs" />
-    <Compile Include="Attributes\AfterCommandAttribute.cs" />
-    <Compile Include="Converters\BoolVisibilityConverter.cs" />
-    <Compile Include="IoC\AutoInjectAttribute.cs" />
-    <Compile Include="IoC\AyxContainer.cs" />
-    <Compile Include="IoC\DefaultContainer.cs" />
-    <Compile Include="IoC\InjectInfo.cs" />
-    <Compile Include="IoC\InjectType.cs" />
-    <Compile Include="MVVM\AyxCommand.cs" />
-    <Compile Include="MVVM\AyxCommandGeneric.cs" />
-    <Compile Include="MVVM\AyxEventCommand.cs" />
-    <Compile Include="MVVM\CommandGenerator.cs" />
-    <Compile Include="MVVM\CommandRouter.cs" />
-    <Compile Include="MVVM\EventDispatcher.cs" />
-    <Compile Include="MVVM\NotificationObject.cs" />
-    <Compile Include="MVVM\ViewModelBase.cs" />
+    <Compile Include="Extensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="BindedTabManager.cs" />
-    <Compile Include="UserAuthentication.cs" />
-    <Compile Include="Utilities\AttributeHelper.cs" />
-    <Compile Include="ViewManager.cs" />
-    <Compile Include="XmlConfig.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

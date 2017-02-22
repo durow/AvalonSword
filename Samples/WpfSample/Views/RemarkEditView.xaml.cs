@@ -10,19 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace WpfSample.Views
 {
     /// <summary>
-    /// TestControl.xaml 的交互逻辑
+    /// RemarkEditView.xaml 的交互逻辑
     /// </summary>
-    public partial class TestControl : UserControl
+    public partial class RemarkEditView : Window
     {
-        public TestControl()
+        public RemarkEditView()
         {
             InitializeComponent();
+            Owner = App.Current.MainWindow;
         }
     }
 }

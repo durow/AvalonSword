@@ -4,13 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A2E1BC50-F95A-47DD-902B-9E492AC78BE1}</ProjectGuid>
+    <ProjectGuid>{71457EC0-A7E6-4BD9-BEB8-E7F1489D5BCB}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Ayx.AvalonSword</RootNamespace>
-    <AssemblyName>AvalonSword</AssemblyName>
+    <RootNamespace>WpfSample.ViewModels</RootNamespace>
+    <AssemblyName>WpfSample.ViewModels</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -34,10 +35,7 @@
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Dlls\System.Windows.Interactivity.dll</HintPath>
-    </Reference>
+    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -46,37 +44,29 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Abstraction\IConfig.cs" />
-    <Compile Include="Abstraction\ILogger.cs" />
-    <Compile Include="Abstraction\INavigationManager.cs" />
-    <Compile Include="Abstraction\IServiceContainer.cs" />
-    <Compile Include="Abstraction\IBindedTabManager.cs" />
-    <Compile Include="Abstraction\IViewManager.cs" />
-    <Compile Include="Locator.cs" />
-    <Compile Include="Abstraction\ITabManager.cs" />
-    <Compile Include="Abstraction\IUserAuthentication.cs" />
-    <Compile Include="Attributes\BeforeCommandAttribute.cs" />
-    <Compile Include="Attributes\AfterCommandAttribute.cs" />
-    <Compile Include="Converters\BoolVisibilityConverter.cs" />
-    <Compile Include="IoC\AutoInjectAttribute.cs" />
-    <Compile Include="IoC\AyxContainer.cs" />
-    <Compile Include="IoC\DefaultContainer.cs" />
-    <Compile Include="IoC\InjectInfo.cs" />
-    <Compile Include="IoC\InjectType.cs" />
-    <Compile Include="MVVM\AyxCommand.cs" />
-    <Compile Include="MVVM\AyxCommandGeneric.cs" />
-    <Compile Include="MVVM\AyxEventCommand.cs" />
-    <Compile Include="MVVM\CommandGenerator.cs" />
-    <Compile Include="MVVM\CommandRouter.cs" />
-    <Compile Include="MVVM\EventDispatcher.cs" />
-    <Compile Include="MVVM\NotificationObject.cs" />
-    <Compile Include="MVVM\ViewModelBase.cs" />
+    <Compile Include="EventTestViewModel.cs" />
+    <Compile Include="MainWindowViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="BindedTabManager.cs" />
-    <Compile Include="UserAuthentication.cs" />
-    <Compile Include="Utilities\AttributeHelper.cs" />
-    <Compile Include="ViewManager.cs" />
-    <Compile Include="XmlConfig.cs" />
+    <Compile Include="RemarkEditViewModel.cs" />
+    <Compile Include="TestViewModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AvalonSword\AvalonSword.csproj">
+      <Project>{a2e1bc50-f95a-47dd-902b-9e492ac78be1}</Project>
+      <Name>AvalonSword</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AvalonSword\WpfSample.Domain\WpfSample.Domain.csproj">
+      <Project>{b45ff8d0-c7d5-4167-ba5b-a1223564776a}</Project>
+      <Name>WpfSample.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AvalonSword\WpfSample.Infrastructure\WpfSample.Infrastructure.csproj">
+      <Project>{a16a0b93-38e5-45cd-a193-a8e0a5daaf54}</Project>
+      <Name>WpfSample.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AvalonSword\WpfSample.Repository\WpfSample.Repository.csproj">
+      <Project>{0c84988e-466b-4c3f-b055-66fa31f3df61}</Project>
+      <Name>WpfSample.Repository</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

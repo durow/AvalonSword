@@ -35,7 +35,8 @@ namespace WpfSample
         {
             container.BindView<MainWindow, MainWindowViewModel>();
             container.BindView<TestView, TestViewModel>();
-            container.BindView<TestControl, TestControlViewModel>();
+            container.BindView<EventTestView, EventTestViewModel>();
+            container.BindView<RemarkEditView, RemarkEditViewModel>();
         }
     }
 }

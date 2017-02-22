@@ -6,6 +6,7 @@
 
 using Ayx.AvalonSword.Abstraction;
 using System;
+using System.Windows;
 
 namespace Ayx.AvalonSword
 {
@@ -13,6 +14,7 @@ namespace Ayx.AvalonSword
     {
         public IServiceContainer ServiceContainer { get; private set; }
         public IViewManager ViewContainer { get; set; }
+        public Window MainWin { get; set; }
 
         public Locator(IServiceContainer serviceContainer)
         {
@@ -23,6 +25,16 @@ namespace Ayx.AvalonSword
             ViewContainer = new ViewManager(serviceContainer);
             ServiceContainer.AddSingleton(ViewContainer);
             ServiceContainer.AddSingleton(ServiceContainer);
+            ServiceContainer.AddSingleton(this);
+        }
+
+        public void ShowMainWindow<TMainWin>() where TMainWin : Window
+        {
+            var win = ViewContainer.CreateWindow<TMainWin>();
+            if (win == null)
+                throw new Exception($"{typeof(TMainWin)} is not a window!");
+            MainWin = win;
+            win.Show();
         }
     }
 }

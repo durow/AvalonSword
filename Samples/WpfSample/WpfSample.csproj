@@ -59,11 +59,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Models\TestModel.cs" />
-    <Compile Include="ViewModels\TestControlViewModel.cs" />
-    <Compile Include="ViewModels\TestViewModel.cs" />
-    <Compile Include="Views\TestControl.xaml.cs">
-      <DependentUpon>TestControl.xaml</DependentUpon>
+    <Compile Include="Views\EventTestView.xaml.cs">
+      <DependentUpon>EventTestView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RemarkEditView.xaml.cs">
+      <DependentUpon>RemarkEditView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\TestView.xaml.cs">
       <DependentUpon>TestView.xaml</DependentUpon>
@@ -77,12 +77,15 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="AppStartup.cs" />
-    <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\TestControl.xaml">
+    <Page Include="Views\EventTestView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\RemarkEditView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -127,6 +130,18 @@
     <ProjectReference Include="..\..\AvalonSword\AvalonSword.csproj">
       <Project>{a2e1bc50-f95a-47dd-902b-9e492ac78be1}</Project>
       <Name>AvalonSword</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\AvalonSword\WpfSample.Domain\WpfSample.Domain.csproj">
+      <Project>{b45ff8d0-c7d5-4167-ba5b-a1223564776a}</Project>
+      <Name>WpfSample.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\AvalonSword\WpfSample.Repository\WpfSample.Repository.csproj">
+      <Project>{0c84988e-466b-4c3f-b055-66fa31f3df61}</Project>
+      <Name>WpfSample.Repository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\WpfSample.ViewModel\WpfSample.ViewModels.csproj">
+      <Project>{71457ec0-a7e6-4bd9-beb8-e7f1489d5bcb}</Project>
+      <Name>WpfSample.ViewModels</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

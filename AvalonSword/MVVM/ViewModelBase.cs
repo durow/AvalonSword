@@ -14,6 +14,18 @@ namespace Ayx.AvalonSword.MVVM
         public CommandRouter CommandRouter { get; set; }
         public FrameworkElement View { get; set; }
 
+        private EventDispatcher _eventDispatcher;
+        public EventDispatcher EventDispatcher
+        {
+            set { _eventDispatcher = value; }
+            get
+            {
+                if (_eventDispatcher == null)
+                    _eventDispatcher = new EventDispatcher(this);
+                return _eventDispatcher;
+            }
+        }
+
         private AyxCommand _router;
         public AyxCommand Router
         {
@@ -25,7 +37,8 @@ namespace Ayx.AvalonSword.MVVM
                     _router = new AyxCommand(o =>
                     {
                         CommandRouter.ExecuteCommand(o.ToString());
-                    },o=> {
+                    }, o =>
+                    {
                         return CommandRouter.CheckCommand(o.ToString());
                     });
                 return _router;
@@ -39,6 +52,15 @@ namespace Ayx.AvalonSword.MVVM
                 return null;
 
             return (TViewModel)view.DataContext;
+        }
+
+        protected void CloseViewAsWindow()
+        {
+            var win = View as Window;
+            if (win == null)
+                throw new System.Exception($"{View.GetType()} is not a Window!");
+
+            win.Close();
         }
     }
 }

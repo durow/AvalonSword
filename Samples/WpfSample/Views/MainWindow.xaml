@@ -5,17 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfSample" WindowStartupLocation="CenterScreen"
         mc:Ignorable="d"
-        Title="MainWindow" Height="550" Width="825">
+        Title="MainWindow" Height="750" Width="925">
     <DockPanel>
         <WrapPanel DockPanel.Dock="Top">
-            <Button Content="AddText" Width="90" Command="{Binding CmdAddText}"/>
+            <Button Content="EventTest" Width="90" Command="{Binding CmdEventTest}"/>
             <Button Content="OpenView" Width="90" Command="{Binding CmdOpenView}"/>
-            <Button Content="RouterTest" Width="90" Command="{Binding Router}" CommandParameter="RouterTest"/>
-            <Button Content="RouterTest2" Width="90" Command="{Binding Router}" CommandParameter="RouterTest2"/>
+            <Button Content="ShowDialog" Width="90" Command="{Binding Router}" CommandParameter="ShowDialog"/>
+            <Button Content="ShowWindow" Width="90" Command="{Binding Router}" CommandParameter="ShowWindow"/>
             <Button Content="Preview" Width="90" Command="{Binding Router}" CommandParameter="ShowPreview"/>
             <Button Content="Nex" Width="90" Command="{Binding Router}" CommandParameter="ShowNext"/>
             <CheckBox IsChecked="{Binding CanRouterTest}" VerticalAlignment="Center" Content="CanRouterTest"/>
         </WrapPanel>
+        <TextBox Text="{Binding LogText}" DockPanel.Dock="Bottom" Height="200" 
+                 HorizontalScrollBarVisibility="Auto" IsReadOnly="True" Margin="3"/>
+        <TextBlock Text="Log:" Margin="5,5,5,0" DockPanel.Dock="Bottom"/>
         <TabControl x:Name="TabTest" ItemsSource="{Binding TabViewManager.TabItems}"
                     SelectedItem="{Binding TabViewManager.SelectedItem}">
         </TabControl>

@@ -13,7 +13,7 @@ namespace WpfSample
         private void Application_Startup(object sender, StartupEventArgs e)
         {
             Locator = GetAppManager();
-            Locator.ViewContainer.CreateView<MainWindow>()?.Show();
+            Locator.ShowMainWindow<MainWindow>();
         }
     }
 }
