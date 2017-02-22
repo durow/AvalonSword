@@ -5,6 +5,7 @@
  */
 
 using Ayx.AvalonSword.Abstraction;
+using Ayx.AvalonSword.IoC;
 using System;
 using System.Windows;
 
@@ -12,29 +13,52 @@ namespace Ayx.AvalonSword
 {
     public class Locator
     {
-        public IServiceContainer ServiceContainer { get; private set; }
+        private IServiceContainer _serviceContainer;
+        public IServiceContainer ServiceContainer
+        {
+            get { return _serviceContainer; }
+            set
+            {
+                if(_serviceContainer != value)
+                {
+                    _serviceContainer = value;
+                    Init();
+                }
+            }
+        }
         public IViewManager ViewContainer { get; set; }
+
         public Window MainWin { get; set; }
 
+        public Locator() : this(null) { }
         public Locator(IServiceContainer serviceContainer)
         {
             if (serviceContainer == null)
-                throw new NullReferenceException($"ServiceContainer can't be null!");
+                serviceContainer = new DefaultContainer();
 
             ServiceContainer = serviceContainer;
-            ViewContainer = new ViewManager(serviceContainer);
-            ServiceContainer.AddSingleton(ViewContainer);
-            ServiceContainer.AddSingleton(ServiceContainer);
-            ServiceContainer.AddSingleton(this);
+        }
+
+        public void BindViews(Action<IViewManager> bindAction)
+        {
+            bindAction?.Invoke(ViewContainer);
         }
 
         public void ShowMainWindow<TMainWin>() where TMainWin : Window
         {
             var win = ViewContainer.CreateWindow<TMainWin>();
             if (win == null)
-                throw new Exception($"{typeof(TMainWin)} is not a window!");
+                throw new Exception($"{typeof(TMainWin).Name} is not a window!");
             MainWin = win;
             win.Show();
+        }
+
+        private void Init()
+        {
+            ViewContainer = new ViewManager(ServiceContainer);
+            ServiceContainer.AddSingleton(ViewContainer);
+            ServiceContainer.AddSingleton(ServiceContainer);
+            ServiceContainer.AddSingleton(this);
         }
     }
 }
