@@ -16,9 +16,9 @@ namespace Ayx.AvalonSword
         List<string> Roles { get; set; }
         List<string> Groups { get; set; }
         bool CheckRole(string role);
-        int CheckInRoles(IList<string> roles);
+        IEnumerable<string> CheckInRoles(IEnumerable<string> roles);
         bool CheckGroup(string group);
-        int CheckInGroups(IList<string> groups);
+        IEnumerable<string> CheckInGroups(IEnumerable<string> groups);
         bool CheckRing(int ring);
         bool CheckToken(string token);
     }

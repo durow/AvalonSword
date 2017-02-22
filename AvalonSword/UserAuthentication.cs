@@ -17,31 +17,33 @@ namespace Ayx.AvalonSword
         public List<string> Groups { get; set; }
         public TUser User { get; set; }
 
+        public UserAuthentication()
+        {
+            Roles = new List<string>();
+            Groups = new List<string>();
+        }
+
         public bool CheckGroup(string group)
         {
             return Groups.Contains(group);
         }
 
-        public int CheckInGroups(IList<string> groups)
+        public IEnumerable<string> CheckInGroups(IEnumerable<string> groups)
         {
-            var result = 0;
             foreach (var group in groups)
             {
                 if (Groups.Contains(group))
-                    result++;
+                    yield return group;
             }
-            return result;
         }
 
-        public int CheckInRoles(IList<string> roles)
+        public IEnumerable<string> CheckInRoles(IEnumerable<string> roles)
         {
-            var result = 0;
             foreach (var role in roles)
             {
-                if (roles.Contains(role))
-                    result++;
+                if (Roles.Contains(role))
+                    yield return role;
             }
-            return result;
         }
 
         public bool CheckRole(string role)

@@ -28,9 +28,9 @@ namespace Ayx.AvalonSword.IoC
 
         public int Count { get { return InjectList.Count; } }
 
-        public readonly  List<InjectInfo> InjectList = new List<InjectInfo>();
+        public readonly List<InjectInfo> InjectList = new List<InjectInfo>();
 
-        public  void Wire<Tfrom,Tto>(string token = "", Func<object> createFunc=null) where Tto:Tfrom
+        public void Wire<Tfrom, Tto>(string token = "", Func<object> createFunc = null) where Tto : Tfrom
         {
             CheckExist<Tfrom>(token);
 
@@ -45,14 +45,14 @@ namespace Ayx.AvalonSword.IoC
                 });
         }
 
-        public void Wire<T>(string token = "", Func<object> createFunc = null) where T:class
+        public void Wire<T>(string token = "", Func<object> createFunc = null) where T : class
         {
             CheckExist<T>(token);
 
             Wire<T, T>(token, createFunc);
         }
 
-        public  void WireSingleton<Tfrom,Tto>(string token = "", Func<object> createFunc = null) where Tto:Tfrom
+        public void WireSingleton<Tfrom, Tto>(string token = "", Func<object> createFunc = null) where Tto : Tfrom
         {
             CheckExist<Tfrom>(token);
 
@@ -67,7 +67,7 @@ namespace Ayx.AvalonSword.IoC
                  });
         }
 
-        public void WireSingleton<T>(string token = "", Func<object> createFunc = null) where T:class
+        public void WireSingleton<T>(string token = "", Func<object> createFunc = null) where T : class
         {
             CheckExist<T>(token);
 
@@ -97,14 +97,9 @@ namespace Ayx.AvalonSword.IoC
         public object Get(Type fromType, string token = "")
         {
             object result = null;
-            var itemDI = GetInjectionInfo(fromType,token);
+            var itemDI = GetInjectionInfo(fromType, token);
             if (itemDI == null)
-            {
-                if (itemDI.From.IsClass)
-                    result = CreateInstance(fromType);
-                else
-                    return null;
-            }
+                result = CreateInstance(fromType);
             else
                 result = CreateInstance(itemDI);
             InjectPropertyDependency(result);
@@ -119,7 +114,7 @@ namespace Ayx.AvalonSword.IoC
             for (int i = 0; i < InjectList.Count; i++)
             {
                 var item = InjectList[i];
-                if(CheckEqual(item,type,token))
+                if (CheckEqual(item, type, token))
                 {
                     find = true;
                     InjectList.Remove(item);
@@ -188,7 +183,7 @@ namespace Ayx.AvalonSword.IoC
             if (!type.IsClass) return null;
 
             var param = GetConstructorParameters(type).ToArray();
-            var result = Activator.CreateInstance(type,param);
+            var result = Activator.CreateInstance(type, param);
 
             return result;
         }
@@ -239,7 +234,7 @@ namespace Ayx.AvalonSword.IoC
 
             foreach (var constructor in constructorList)
             {
-                if(constructor.GetCustomAttributes(typeof(AutoInjectAttribute),false).Any())
+                if (constructor.GetCustomAttributes(typeof(AutoInjectAttribute), false).Any())
                 {
                     return constructor;
                 }
