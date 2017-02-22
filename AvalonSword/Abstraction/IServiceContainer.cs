@@ -15,5 +15,6 @@ namespace Ayx.AvalonSword.Abstraction
         void AddSingleton<TInterface>(TInterface item);
         TInterface GetService<TInterface>();
         object GetService(Type type);
+        bool Contains<T>();
     }
 }

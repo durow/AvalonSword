@@ -82,7 +82,7 @@ namespace Ayx.AvalonSword.IoC
                  new InjectInfo
                  {
                      From = typeof(Tfrom),
-                     To = instance.GetType(),
+                     To = typeof(Tfrom),
                      InjectType = InjectType.Singleton,
                      instance = instance,
                      Token = token,
@@ -99,7 +99,12 @@ namespace Ayx.AvalonSword.IoC
             object result = null;
             var itemDI = GetInjectionInfo(fromType,token);
             if (itemDI == null)
-                result = CreateInstance(fromType);
+            {
+                if (itemDI.From.IsClass)
+                    result = CreateInstance(fromType);
+                else
+                    return null;
+            }
             else
                 result = CreateInstance(itemDI);
             InjectPropertyDependency(result);

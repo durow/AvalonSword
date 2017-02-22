@@ -4,6 +4,7 @@
  * Date:2017.02.12
  */
 
+using Ayx.AvalonSword.Abstraction;
 using System.Windows;
 
 namespace Ayx.AvalonSword
@@ -11,6 +12,7 @@ namespace Ayx.AvalonSword
     public interface IViewManager
     {
         int Count { get; }
+        IServiceContainer ServiceContainer {get;set;}
 
         #region CreateView
 

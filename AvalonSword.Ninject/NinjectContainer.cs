@@ -35,6 +35,11 @@ namespace Ayx.AvalonSword.Ninject
             container.Bind<TInterface>().To<TService>().InSingletonScope();
         }
 
+        public bool Contains<T>()
+        {
+            return container.CanResolve<T>();
+        }
+
         public object GetService(Type type)
         {
             return container.Get(type);

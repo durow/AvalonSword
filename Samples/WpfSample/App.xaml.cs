@@ -18,8 +18,8 @@ namespace WpfSample
         private void Application_Startup(object sender, StartupEventArgs e)
         {
             Locator = new Locator();
-            Locator.UseNinject(BindServices);
             Locator.BindViews(BindViews);
+            Locator.UseNinject(BindServices);
             Locator.ShowMainWindow<MainWindow>();
         }
 

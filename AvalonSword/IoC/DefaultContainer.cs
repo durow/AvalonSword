@@ -22,6 +22,11 @@ namespace Ayx.AvalonSword.IoC
             container.WireSingleton<TInterface, TService>();
         }
 
+        public bool Contains<T>()
+        {
+            return true;
+        }
+
         public object GetService(Type type)
         {
             return container.Get(type);

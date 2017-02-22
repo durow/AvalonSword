@@ -22,11 +22,12 @@ namespace Ayx.AvalonSword
                 if(_serviceContainer != value)
                 {
                     _serviceContainer = value;
-                    Init();
+                    InitServices();
                 }
             }
         }
-        public IViewManager ViewContainer { get; set; }
+
+        public IViewManager ViewManager { get; set; }
 
         public Window MainWin { get; set; }
 
@@ -41,24 +42,34 @@ namespace Ayx.AvalonSword
 
         public void BindViews(Action<IViewManager> bindAction)
         {
-            bindAction?.Invoke(ViewContainer);
+            if (ViewManager == null)
+            {
+                ViewManager = new ViewManager();
+                ViewManager.ServiceContainer = ServiceContainer;
+            }
+
+            bindAction?.Invoke(ViewManager);
         }
 
         public void ShowMainWindow<TMainWin>() where TMainWin : Window
         {
-            var win = ViewContainer.CreateWindow<TMainWin>();
+            var win = ViewManager.CreateWindow<TMainWin>();
             if (win == null)
                 throw new Exception($"{typeof(TMainWin).Name} is not a window!");
             MainWin = win;
             win.Show();
         }
 
-        private void Init()
+        private void InitServices()
         {
-            ViewContainer = new ViewManager(ServiceContainer);
-            ServiceContainer.AddSingleton(ViewContainer);
+            if (ViewManager == null)
+                ViewManager = new ViewManager();
+            ViewManager.ServiceContainer = ServiceContainer;
+
+            ServiceContainer.AddSingleton(ViewManager);
             ServiceContainer.AddSingleton(ServiceContainer);
             ServiceContainer.AddSingleton(this);
+            
         }
     }
 }

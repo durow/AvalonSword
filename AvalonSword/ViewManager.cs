@@ -14,7 +14,7 @@ namespace Ayx.AvalonSword
     public class ViewManager : IViewManager
     {
         private Dictionary<Type, Type> VMList = new Dictionary<Type, Type>();
-        private IServiceContainer serviceContainer;
+        public IServiceContainer ServiceContainer { get; set; }
 
         public int Count
         {
@@ -24,9 +24,10 @@ namespace Ayx.AvalonSword
             }
         }
 
-        public ViewManager(IServiceContainer serviceContainer)
+        public ViewManager(IServiceContainer serviceContainer = null)
         {
-            this.serviceContainer = serviceContainer;
+            if(serviceContainer  != null)
+                this.ServiceContainer = serviceContainer;
         }
 
         #region CreateView
@@ -37,7 +38,7 @@ namespace Ayx.AvalonSword
             var viewType = typeof(TView);
             var vmType = GetViewModelFromView(viewType);
             if (vmType == null)
-                return serviceContainer.GetService<TView>();
+                return ServiceContainer.GetService<TView>();
 
             return CreateView(viewType, vmType) as TView;
         }
@@ -66,7 +67,7 @@ namespace Ayx.AvalonSword
             where TView : FrameworkElement
             where TViewModel : class
         {
-            var vm = serviceContainer.GetService<TViewModel>();
+            var vm = ServiceContainer.GetService<TViewModel>();
             return CreateView<TView, TViewModel>(vm);
         }
 
@@ -286,7 +287,7 @@ namespace Ayx.AvalonSword
 
         public object GetViewModel(Type vmType)
         {
-            var vm = serviceContainer.GetService(vmType);
+            var vm = ServiceContainer.GetService(vmType);
             return SetCommandAop(vm);
         }
 
@@ -324,7 +325,7 @@ namespace Ayx.AvalonSword
 
         private FrameworkElement CreateView(Type viewType, Type vmType, object vm = null)
         {
-            var view = serviceContainer.GetService(viewType) as FrameworkElement;
+            var view = ServiceContainer.GetService(viewType) as FrameworkElement;
             if (vm == null)
                 vm = GetViewModel(vmType);
 
