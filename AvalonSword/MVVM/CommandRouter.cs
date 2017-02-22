@@ -6,6 +6,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 
 namespace Ayx.AvalonSword.MVVM
 {
@@ -15,7 +16,7 @@ namespace Ayx.AvalonSword.MVVM
         public Type ViewModelType { get; set; }
         private Dictionary<string, Action> commandList = new Dictionary<string, Action>();
         private Dictionary<string, Func<bool>> checkList = new Dictionary<string, Func<bool>>();
-
+        private Dictionary<string, Action<object>> eventList = new Dictionary<string, Action<object>>();
         public CommandRouter(object viewmodel)
         {
             ViewModel = viewmodel;
@@ -55,6 +56,49 @@ namespace Ayx.AvalonSword.MVVM
                 method.Invoke(ViewModel, new object[] { });
             });
         }
+
+        private void InitMethodList()
+        {
+            foreach (var method in ViewModelType.GetMethods())
+            {
+                if (!method.IsPublic) continue;
+                var paramNumber = method.GetParameters().Length;
+                if (paramNumber > 1) continue;
+                var methodName = method.Name;
+
+                if(paramNumber == 0)
+                {
+                    if (methodName.EndsWith("Check") && method.ReturnType == typeof(bool))
+                        AddCommandCheck(method);
+                    else
+                        AddCommand(method);
+                }
+
+                if (paramNumber == 1)
+                    AddEvent(method);
+            }
+        }
+
+        private void AddCommand(MethodInfo method)
+        {
+            if (commandList.ContainsKey(method.Name)) return;
+            commandList[method.Name] = new Action(() =>
+            {
+                method.Invoke(ViewModel, new object[] { });
+            });
+        }
+
+        private void AddCommandCheck(MethodInfo method)
+        {
+            if (checkList.ContainsKey(method.Name)) return;
+            checkList[method.Name] = new Func<bool>(() =>
+            {
+                return (bool)method.Invoke(ViewModel, new object[] { });
+            });
+        }
+
+        private void AddEvent(MethodInfo method)
+        { }
 
         private Func<bool> GetCheck(string cmdName)
         {
