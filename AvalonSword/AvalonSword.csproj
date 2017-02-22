@@ -58,6 +58,11 @@
     <Compile Include="Attributes\BeforeCommandAttribute.cs" />
     <Compile Include="Attributes\AfterCommandAttribute.cs" />
     <Compile Include="Converters\BoolVisibilityConverter.cs" />
+    <Compile Include="IoC\AutoInjectAttribute.cs" />
+    <Compile Include="IoC\AyxContainer.cs" />
+    <Compile Include="IoC\DefaultContainer.cs" />
+    <Compile Include="IoC\InjectInfo.cs" />
+    <Compile Include="IoC\InjectType.cs" />
     <Compile Include="MVVM\AyxCommand.cs" />
     <Compile Include="MVVM\AyxCommandGeneric.cs" />
     <Compile Include="MVVM\AyxEventCommand.cs" />
@@ -68,6 +73,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BindedTabManager.cs" />
     <Compile Include="UserAuthentication.cs" />
+    <Compile Include="Utilities\AttributeHelper.cs" />
     <Compile Include="ViewManager.cs" />
     <Compile Include="XmlConfig.cs" />
   </ItemGroup>
