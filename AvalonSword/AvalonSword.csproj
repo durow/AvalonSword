@@ -52,10 +52,11 @@
     <Compile Include="Abstraction\IServiceContainer.cs" />
     <Compile Include="Abstraction\IBindedTabManager.cs" />
     <Compile Include="Abstraction\IViewManager.cs" />
-    <Compile Include="AppManager.cs" />
+    <Compile Include="Locator.cs" />
     <Compile Include="Abstraction\ITabManager.cs" />
     <Compile Include="Abstraction\IUserAuthentication.cs" />
     <Compile Include="Attributes\BeforeCommandAttribute.cs" />
+    <Compile Include="Attributes\AfterCommandAttribute.cs" />
     <Compile Include="Converters\BoolVisibilityConverter.cs" />
     <Compile Include="MVVM\AyxCommand.cs" />
     <Compile Include="MVVM\AyxCommandGeneric.cs" />

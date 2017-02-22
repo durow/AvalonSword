@@ -9,12 +9,12 @@ using System;
 
 namespace Ayx.AvalonSword
 {
-    public class AppManager
+    public class Locator
     {
         public IServiceContainer ServiceContainer { get; private set; }
         public IViewManager ViewContainer { get; set; }
 
-        public AppManager(IServiceContainer serviceContainer)
+        public Locator(IServiceContainer serviceContainer)
         {
             if (serviceContainer == null)
                 throw new NullReferenceException($"ServiceContainer can't be null!");

@@ -8,12 +8,12 @@ namespace WpfSample
     /// </summary>
     public partial class App : Application
     {
-        public static AppManager Manager;
+        public static Locator Locator;
 
         private void Application_Startup(object sender, StartupEventArgs e)
         {
-            Manager = GetAppManager();
-            Manager.ViewContainer.CreateView<MainWindow>()?.Show();
+            Locator = GetAppManager();
+            Locator.ViewContainer.CreateView<MainWindow>()?.Show();
         }
     }
 }

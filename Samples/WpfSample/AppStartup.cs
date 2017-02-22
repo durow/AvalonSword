@@ -15,10 +15,10 @@ namespace WpfSample
 {
     partial class App
     {
-        public AppManager GetAppManager()
+        public Locator GetAppManager()
         {
             var kernel = new StandardKernel();
-            var result = new AppManager(new NinjectContainer(kernel));
+            var result = new Locator(new NinjectContainer(kernel));
 
             BindServices(kernel);
             BindViews(result.ViewContainer);

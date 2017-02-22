@@ -10,7 +10,6 @@ namespace WpfSample.Models
     public class TestModel : NotificationObject
     {
         private int intValue;
-
         public int IntValue
         {
             get { return intValue; }
