@@ -52,6 +52,7 @@
     <Compile Include="Abstraction\IServiceContainer.cs" />
     <Compile Include="Abstraction\IBindedTabManager.cs" />
     <Compile Include="Abstraction\IViewManager.cs" />
+    <Compile Include="Abstraction\IMapper.cs" />
     <Compile Include="Locator.cs" />
     <Compile Include="Abstraction\ITabManager.cs" />
     <Compile Include="Abstraction\IUserAuthentication.cs" />
@@ -63,6 +64,9 @@
     <Compile Include="IoC\DefaultContainer.cs" />
     <Compile Include="IoC\InjectInfo.cs" />
     <Compile Include="IoC\InjectType.cs" />
+    <Compile Include="Mapper\MappingInfo.cs" />
+    <Compile Include="Mapper\SimpleMapper.cs" />
+    <Compile Include="Mapper\SimpleMapperExtensions.cs" />
     <Compile Include="MVVM\AyxCommand.cs" />
     <Compile Include="MVVM\AyxCommandGeneric.cs" />
     <Compile Include="MVVM\AyxEventCommand.cs" />
