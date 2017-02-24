@@ -67,5 +67,8 @@ namespace Ayx.AvalonSword
         void CreateEmpty();
 
         void Reload();
+
+        T GetConfig<T>(string basePath);
+        void SetConfig<T>(T config, string basePath);
     }
 }

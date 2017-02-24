@@ -10,7 +10,7 @@ using System.Xml;
 
 namespace Ayx.AvalonSword
 {
-    public class XmlConfig:IConfig
+    public class XmlConfig : IConfig
     {
         /// <summary>
         /// filename of the config file
@@ -75,7 +75,7 @@ namespace Ayx.AvalonSword
                 throw new Exception("path can't be null!");
 
             var node = GetNode(path);
-            if (node != null) 
+            if (node != null)
                 throw new Exception($"path:{path} already exits!");
 
             var nodeStringList = StandardPath(path).Split('/');
@@ -143,7 +143,7 @@ namespace Ayx.AvalonSword
         public T Get<T>(string path)
         {
             var value = Get(path);
-            return (T) Convert.ChangeType(value, typeof(T));
+            return (T)Convert.ChangeType(value, typeof(T));
         }
 
         /// <summary>
@@ -154,7 +154,7 @@ namespace Ayx.AvalonSword
         public string Get(string path)
         {
             var node = Doc.SelectSingleNode(StandardPath(path));
-            if(node == null)
+            if (node == null)
                 throw new Exception($"path:{path} not found!");
 
             return node.InnerText;
@@ -170,7 +170,7 @@ namespace Ayx.AvalonSword
         public void Set(string path, string value)
         {
             var node = GetNode(path);
-            if (node == null) 
+            if (node == null)
                 throw new Exception($"path:{path} not found!");
 
             node.InnerText = value;
@@ -181,6 +181,43 @@ namespace Ayx.AvalonSword
         {
             Doc = new XmlDocument();
             Doc.Load(FileName);
+        }
+
+        public T GetConfig<T>(string basePath = "")
+        {
+            var result = Activator.CreateInstance<T>();
+            var type = typeof(T);
+            if (!string.IsNullOrEmpty(basePath))
+                basePath += "/";
+
+            foreach (var property in type.GetProperties())
+            {
+                if (property.PropertyType.IsClass) continue;
+                if (property.PropertyType.IsInterface) continue;
+
+                var node = GetNode(basePath + property.Name);
+                if (node != null)
+                {
+                    property.SetValue(result, node.InnerText, null);
+                }
+            }
+
+            return result;
+        }
+
+        public void SetConfig<T>(T config, string basePath = "")
+        {
+            if (string.IsNullOrEmpty(basePath))
+                basePath += "/";
+            var type = typeof(T);
+            foreach (var property in type.GetProperties())
+            {
+                if (property.PropertyType.IsClass) continue;
+                if (property.PropertyType.IsInterface) continue;
+
+                var v = property.GetValue(config, null);
+                AddOrSet(basePath, v.ToString());
+            }
         }
 
         #endregion
