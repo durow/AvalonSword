@@ -53,6 +53,7 @@
     <Compile Include="Abstraction\IBindedTabManager.cs" />
     <Compile Include="Abstraction\IViewManager.cs" />
     <Compile Include="Abstraction\IMapper.cs" />
+    <Compile Include="Converters\NoReturnConverter.cs" />
     <Compile Include="Locator.cs" />
     <Compile Include="Abstraction\ITabManager.cs" />
     <Compile Include="Abstraction\IUserAuthentication.cs" />
