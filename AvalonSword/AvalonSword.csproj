@@ -54,6 +54,17 @@
     <Compile Include="Abstraction\IViewManager.cs" />
     <Compile Include="Abstraction\IMapper.cs" />
     <Compile Include="Converters\NoReturnConverter.cs" />
+    <Compile Include="Data\SqlExecuter.cs" />
+    <Compile Include="Data\DbConnectionExtensions.cs" />
+    <Compile Include="Data\ISqlExecuter.cs" />
+    <Compile Include="Data\ObjectMapping.cs" />
+    <Compile Include="Data\SQL\DeleteGenerator.cs" />
+    <Compile Include="Data\SQL\InsertGenerator.cs" />
+    <Compile Include="Data\SQL\SqlGenerator.cs" />
+    <Compile Include="Data\SQL\SelectGenerator.cs" />
+    <Compile Include="Data\SQL\SqlBuilder.cs" />
+    <Compile Include="Data\SQL\UpdateGenerator.cs" />
+    <Compile Include="Repository\IRepository.cs" />
     <Compile Include="Locator.cs" />
     <Compile Include="Abstraction\ITabManager.cs" />
     <Compile Include="Abstraction\IUserAuthentication.cs" />
@@ -83,6 +94,7 @@
     <Compile Include="ViewManager.cs" />
     <Compile Include="XmlConfig.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
