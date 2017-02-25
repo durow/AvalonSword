@@ -62,7 +62,7 @@
     <Compile Include="Data\SQL\InsertGenerator.cs" />
     <Compile Include="Data\SQL\SqlGenerator.cs" />
     <Compile Include="Data\SQL\SelectGenerator.cs" />
-    <Compile Include="Data\SQL\SqlBuilder.cs" />
+    <Compile Include="Data\SQL\AvalonData.cs" />
     <Compile Include="Data\SQL\UpdateGenerator.cs" />
     <Compile Include="Repository\IRepository.cs" />
     <Compile Include="Locator.cs" />

@@ -5,35 +5,24 @@ namespace Ayx.AvalonSword.Data
     public class DeleteGenerator : SqlGenerator
     {
         private const string verb = "D";
-        private string tableName;
         private string whereField;
+
+        public DeleteGenerator()
+        { }
 
         public DeleteGenerator(string tableName)
         {
-            this.tableName = tableName;
+            TableName = tableName;
         }
 
-        public override string GetKey()
+        protected override string GetKey()
         {
-            return verb + tableName + whereField;
-        }
-
-        public override string GetSQL()
-        {
-            var key = GetKey();
-            if (SqlCache.ContainsKey(key))
-                return SqlCache[key];
-            else
-            {
-                var result = GenerateSQL();
-                SqlCache[key] = result;
-                return result;
-            }
+            return verb + TableName + whereField;
         }
 
         public DeleteGenerator From(string tableName)
         {
-            this.tableName = tableName;
+            TableName = tableName;
             return this;
         }
 
@@ -54,9 +43,9 @@ namespace Ayx.AvalonSword.Data
             return SqlExecuter.ExecuteNonQuery(sql, connection, parameters, transaction);
         }
 
-        private string GenerateSQL()
+        protected override string GenerateSQL()
         {
-            return $"DELETE {tableName} {whereField}";
+            return $"DELETE FROM {TableName} {whereField}";
         }
     }
 }
