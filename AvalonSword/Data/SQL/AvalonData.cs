@@ -13,27 +13,37 @@ namespace Ayx.AvalonSword.Data
                 SqlGenerator.SqlExecuter = sqlExecuter;
         }
 
-        SelectGenerator Select(string fields)
+        public SelectGenerator Select<T>(string fields)
         {
-            return new SelectGenerator();
+            return new SelectGenerator(typeof(T).Name).Fields(fields);
         }
 
-        UpdateGenerator Update(string fields)
+        public SelectGenerator Select(string fields)
         {
-            return new UpdateGenerator();
+            return new SelectGenerator().Fields(fields);
         }
 
-        InsertGenerator Insert<T>(T entity)
+        public UpdateGenerator Update<T>()
+        {
+            return new UpdateGenerator(typeof(T).Name);
+        }
+
+        public UpdateGenerator Update(string tableName)
+        {
+            return new UpdateGenerator(tableName);
+        }
+
+        public InsertGenerator Insert<T>(T entity)
         {
             return new InsertGenerator(entity);
         }
 
-        DeleteGenerator Delete()
+        public DeleteGenerator DeleteFrom(string tableName)
         {
-            return new DeleteGenerator();
+            return new DeleteGenerator(tableName);
         }
 
-        DeleteGenerator Delete<T>()
+        public DeleteGenerator DeleteFrom<T>()
         {
             return new DeleteGenerator(typeof(T).Name);
         }
