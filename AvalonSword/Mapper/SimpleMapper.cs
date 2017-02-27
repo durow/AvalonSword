@@ -46,10 +46,10 @@ namespace Ayx.AvalonSword.Mapper
             return Map<T>(src, info);
         }
 
-        public T Map<T>(object src, MappingInfo cache)
+        public T Map<T>(object src, MappingInfo info)
         {
             var dest = Activator.CreateInstance<T>();
-            foreach (var property in cache.Properties)
+            foreach (var property in info.GetPropertiesMapping(src))
             {
                 var v = property.Key.GetValue(src, null);
                 property.Value.SetValue(dest, v, null);

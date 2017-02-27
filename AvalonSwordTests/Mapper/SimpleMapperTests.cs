@@ -17,7 +17,6 @@ namespace Ayx.AvalonSword.Mapper.Tests
             var info = mapper.CreateMap<TestSrc, TestDest>();
 
             Assert.AreEqual(1, mapper.Cache.Count);
-            Assert.AreEqual(3, info.Properties.Count);
 
             var test = mapper.Map<TestDest>(new TestSrc());
             Assert.IsNotNull(test);
@@ -60,7 +59,6 @@ namespace Ayx.AvalonSword.Mapper.Tests
                 });
 
             Assert.AreEqual(1, mapper.Cache.Count);
-            Assert.AreEqual(5, info.Properties.Count);
 
             var test = mapper.Map<TestDest>(new TestSrc());
             Assert.IsNotNull(test);

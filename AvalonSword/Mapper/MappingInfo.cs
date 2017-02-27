@@ -10,16 +10,41 @@ namespace Ayx.AvalonSword.Mapper
     {
         public Type Src { get; private set; }
         public Type Dest { get; private set; }
-        public readonly Dictionary<PropertyInfo, PropertyInfo> Properties = new Dictionary<PropertyInfo, PropertyInfo>();
+        private Dictionary<PropertyInfo, PropertyInfo> properties = new Dictionary<PropertyInfo, PropertyInfo>();
         private Dictionary<string, string> nameMapping = new Dictionary<string, string>();
+        private Dictionary<string, Func<object, bool>> filters = new Dictionary<string, Func<object, bool>>();
 
-        public MappingInfo(Type src, Type dest, Dictionary<string,string> nameMapping)
+        public MappingInfo(Type src, Type dest, Dictionary<string, string> nameMapping)
         {
             Src = src;
             Dest = dest;
-            if(nameMapping != null)
+            if (nameMapping != null)
                 this.nameMapping = nameMapping;
             CheckProperties();
+        }
+
+        public MappingInfo AddFilter<TSrc>(string srcName, Func<TSrc, bool> func) where TSrc : class
+        {
+            if (string.IsNullOrEmpty(srcName))
+                throw new Exception("source property name can't be null");
+
+            filters[srcName] = (Func<object, bool>)func;
+            return this;
+        }
+
+        public Dictionary<PropertyInfo, PropertyInfo> GetPropertiesMapping(object src)
+        {
+            if (filters.Count == 0) return properties;
+
+            var result = new Dictionary<PropertyInfo, PropertyInfo>();
+            foreach (var info in properties)
+            {
+                if (!filters.ContainsKey(info.Key.Name))
+                    result.Add(info.Key, info.Value);
+                else if (filters[info.Key.Name].Invoke(src))
+                    result.Add(info.Key, info.Value);
+            }
+            return result;
         }
 
         private void CheckProperties()
@@ -33,7 +58,7 @@ namespace Ayx.AvalonSword.Mapper
                 if (destProperty == null) continue;
                 if (srcProperty.PropertyType != destProperty.PropertyType) continue;
 
-                Properties.Add(srcProperty, destProperty);
+                properties.Add(srcProperty, destProperty);
             }
         }
 
