@@ -8,12 +8,12 @@ using System.Text;
 namespace Ayx.AvalonSword.Mapper.Tests
 {
     [TestClass()]
-    public class SimpleMapperTests
+    public class AvalonMapperTests
     {
         [TestMethod()]
         public void CreateMapTest()
         {
-            var mapper = new SimpleMapper();
+            var mapper = new AvalonMapper();
             var info = mapper.CreateMap<TestSrc, TestDest>();
 
             Assert.AreEqual(1, mapper.Cache.Count);
@@ -32,7 +32,7 @@ namespace Ayx.AvalonSword.Mapper.Tests
         public void MapTest()
         {
             //map without CreateMap
-            var mapper = new SimpleMapper();
+            var mapper = new AvalonMapper();
             Assert.AreEqual(0, mapper.Cache.Count);
 
             var test = mapper.Map<TestDest>(new TestSrc());
@@ -50,7 +50,7 @@ namespace Ayx.AvalonSword.Mapper.Tests
         [TestMethod()]
         public void MapWithNameMappingTest()
         {
-            var mapper = new SimpleMapper();
+            var mapper = new AvalonMapper();
             var info = mapper.CreateMap<TestSrc, TestDest>(
                 new Dictionary<string, string>
                 {

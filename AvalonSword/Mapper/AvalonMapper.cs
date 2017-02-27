@@ -9,7 +9,7 @@ using System.Collections.Generic;
 
 namespace Ayx.AvalonSword.Mapper
 {
-    public class SimpleMapper:IMapper
+    public class AvalonMapper:IMapper
     {
         public readonly List<MappingInfo> Cache = new List<MappingInfo>();
 

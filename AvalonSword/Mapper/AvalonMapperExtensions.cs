@@ -5,11 +5,11 @@ using System.Text;
 
 namespace Ayx.AvalonSword.Mapper
 {
-    public static class SimpleMapperExtensions
+    public static class AvalonMapperExtensions
     {
-        public static SimpleMapper UseSimpleMapper(this Locator locator, Action<SimpleMapper> mappingAction)
+        public static AvalonMapper UseSimpleMapper(this Locator locator, Action<AvalonMapper> mappingAction)
         {
-            var mapper = new SimpleMapper();
+            var mapper = new AvalonMapper();
             if (mappingAction != null)
                 mappingAction.Invoke(mapper);
 
