@@ -26,7 +26,11 @@ namespace Ayx.AvalonSword.Mapper
             if (string.IsNullOrEmpty(srcName))
                 throw new Exception("source property name can't be null");
 
-            filters[srcName] = (Func<object, bool>)func;
+            filters[srcName] = new Func<object, bool>(o =>
+            {
+                var temp = o as TSrc;
+                return func.Invoke(temp);
+            });
             return this;
         }
 

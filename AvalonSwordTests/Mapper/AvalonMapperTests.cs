@@ -71,7 +71,7 @@ namespace Ayx.AvalonSword.Mapper.Tests
         }
     }
 
-    class TestSrc
+    public class TestSrc
     {
         public int IntTest { get; set; } = 1234;
         public string StringTest { get; set; } = "strTest";
@@ -81,7 +81,7 @@ namespace Ayx.AvalonSword.Mapper.Tests
         public string TestC { get; set; } = "TestC";
     }
 
-    class TestDest
+    public class TestDest
     {
         public int IntTest { get; set; }
         public string StringTest { get; set; }

@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="IoC\AyxContainerTests.cs" />
     <Compile Include="Mapper\AvalonMapperTests.cs" />
+    <Compile Include="Mapper\MappingInfoTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserAuthenticationTests.cs" />
     <Compile Include="XmlConfigTests.cs" />
