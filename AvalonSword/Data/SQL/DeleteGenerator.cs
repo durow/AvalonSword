@@ -32,12 +32,12 @@ namespace Ayx.AvalonSword.Data
             return this;
         }
 
-        public int Go(object parameters, IDbTransaction transaction)
+        public int Go(object parameters, IDbTransaction transaction = null)
         {
             return Go(Connection, parameters, transaction);
         }
 
-        public int Go(IDbConnection connection, object parameters = null, IDbTransaction transaction = null)
+        public int Go(IDbConnection connection, object parameters, IDbTransaction transaction = null)
         {
             var sql = GetSQL();
             return SqlExecuter.ExecuteNonQuery(sql, connection, parameters, transaction);

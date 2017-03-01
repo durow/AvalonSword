@@ -1,22 +1,27 @@
-﻿using System.Data;
+﻿using System.Collections.Generic;
+using System.Data;
 
 namespace Ayx.AvalonSword.Data
 {
     public static class DbConnectionExtensions
     {
-        public static SelectGenerator Select<T>(this IDbConnection connection, string fields)
+        public static ISqlExecuter sqlExecuter = new SqlExecuter();
+
+        public static SelectGenerator Select<T>(this IDbConnection connection, string fields = "*")
         {
             return new SelectGenerator(typeof(T).Name)
             {
-                Connection = connection
+                Connection = connection,
+                SqlExecuter = sqlExecuter
             }.Fields(fields);
         }
 
-        public static SelectGenerator Select(this IDbConnection connection, string fields)
+        public static SelectGenerator Select(this IDbConnection connection, string fields = "*")
         {
             return new SelectGenerator()
             {
-                Connection = connection
+                Connection = connection,
+                SqlExecuter = sqlExecuter
             }.Fields(fields);
         }
 
@@ -24,25 +29,41 @@ namespace Ayx.AvalonSword.Data
         {
             return new UpdateGenerator(typeof(T).Name)
             {
-                Connection = connection
+                Connection = connection,
+                SqlExecuter = sqlExecuter
             };
         }
 
         public static UpdateGenerator Update(this IDbConnection connection, string tableName)
         {
-            return new UpdateGenerator(tableName);
+            return new UpdateGenerator(tableName)
+            { SqlExecuter = sqlExecuter };
         }
 
         public static InsertGenerator Insert<T>(this IDbConnection connection, T entity)
         {
-            return new InsertGenerator(entity) { Connection = connection};
+            return new InsertGenerator(entity)
+            {
+                Connection = connection,
+                SqlExecuter = sqlExecuter
+            };
+        }
+
+        public static InsertGenerator Insert<T>(this IDbConnection connection, IEnumerable<T> itemList)
+        {
+            return new InsertGenerator(itemList)
+            {
+                Connection = connection,
+                SqlExecuter = sqlExecuter
+            };
         }
 
         public static DeleteGenerator DeleteFrom(this IDbConnection connection, string tableName)
         {
             return new DeleteGenerator(tableName)
             {
-                Connection = connection
+                Connection = connection,
+                SqlExecuter = sqlExecuter
             };
         }
 
@@ -50,7 +71,8 @@ namespace Ayx.AvalonSword.Data
         {
             return new DeleteGenerator(typeof(T).Name)
             {
-                Connection = connection
+                Connection = connection,
+                SqlExecuter = sqlExecuter
             };
         }
     }

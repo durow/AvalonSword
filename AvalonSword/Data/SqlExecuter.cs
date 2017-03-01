@@ -76,6 +76,34 @@ namespace Ayx.AvalonSword.Data
             return cmd;
         }
 
+        public int InsertList(string sql, IDbConnection connection, IEnumerable<object> parameters, IDbTransaction transaction)
+        {
+            var result = 0;
+            if (connection.State == ConnectionState.Closed)
+                connection.Open();
+
+            if (transaction == null)
+                transaction = connection.BeginTransaction();
+
+            try
+            {
+                foreach (var item in parameters)
+                {
+                    var cmd = GetCommand(sql, connection, item, transaction);
+                    result += cmd.ExecuteNonQuery();
+                }
+            }
+            catch
+            {
+                transaction.Rollback();
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return result;
+        }
+
         private void AddCommandParameters(IDbCommand cmd, object parameters)
         {
             if (parameters == null) return;

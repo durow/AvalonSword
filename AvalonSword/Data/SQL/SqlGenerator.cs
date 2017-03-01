@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
 
 namespace Ayx.AvalonSword.Data
 {
@@ -11,7 +8,7 @@ namespace Ayx.AvalonSword.Data
         public string TableName { get; set; }
         protected static Dictionary<string, string> SqlCache = new Dictionary<string, string>();
         protected static Dictionary<string, ObjectMapping> OM = new Dictionary<string, ObjectMapping>();
-        public static ISqlExecuter SqlExecuter { get; set; } = new SqlExecuter();
+        public ISqlExecuter SqlExecuter { get; set; }
         public IDbConnection Connection { get; set; }
 
         public string GetSQL()

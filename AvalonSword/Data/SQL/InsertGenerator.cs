@@ -12,6 +12,7 @@ namespace Ayx.AvalonSword.Data
         private string fields;
         private string except;
         private object param;
+        private IEnumerable<object> paramList;
 
         public InsertGenerator(object item)
         {
@@ -19,6 +20,16 @@ namespace Ayx.AvalonSword.Data
                 throw new NullReferenceException("item can't be null");
             param = item;
             TableName = item.GetType().Name;
+        }
+
+        public InsertGenerator(IEnumerable<object> list)
+        {
+            if (list.Count() == 0)
+                throw new Exception("list count must > 0");
+
+            param = list.FirstOrDefault();
+            paramList = list;
+            TableName = param.GetType().Name;
         }
 
         protected override string GetKey()
@@ -56,7 +67,11 @@ namespace Ayx.AvalonSword.Data
         public int Go(IDbConnection connection, IDbTransaction transaction = null)
         {
             var sql = GetSQL();
-            return SqlExecuter.ExecuteNonQuery(sql, connection, param, transaction);
+
+            if (paramList == null)
+                return SqlExecuter.ExecuteNonQuery(sql, connection, param, transaction);
+            else
+                return SqlExecuter.InsertList(sql, connection, paramList, transaction);
         }
 
         protected override string GenerateSQL()

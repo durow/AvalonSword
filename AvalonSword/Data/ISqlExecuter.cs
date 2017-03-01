@@ -10,5 +10,6 @@ namespace Ayx.AvalonSword.Data
         object ExecuteScalar(string sql, IDbConnection connection, object parameters, IDbTransaction transaction);
         IEnumerable<T> Execute<T>(string sql, IDbConnection connection, object parameters, IDbTransaction transaction);
         IEnumerable<dynamic> Execute(string sql, IDbConnection connection, object parameters, IDbTransaction transaction);
+        int InsertList(string sql, IDbConnection connection, IEnumerable<object> parameters, IDbTransaction transaction);
     }
 }

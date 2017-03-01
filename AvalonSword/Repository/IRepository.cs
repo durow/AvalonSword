@@ -1,18 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace Ayx.AvalonSword
 {
-    public interface IRepository<T>
+    public interface IRepository<T> where T : class
     {
         IEnumerable<T> GetAll();
         T GetOne(string keyField, object value);
-        void Inser(IEnumerable<T> entityList);
-        void Update(T entity, string keyField, object value);
-        void UpdateField(string keyField, object keyValue, string updateField, object updateValue);
-        void DeleteOne(string key, object value);
+        int Insert(T item);
+        int Insert(IEnumerable<T> entityList);
+        int Update(T entity, string keyField);
+        int UpdateField(string keyField, object keyValue, string updateField, object updateValue);
+        int DeleteOne(string key, object value);
+        int Clear();
+        int CreateTable();
     }
 }

@@ -67,6 +67,7 @@
     <Compile Include="Data\SQL\SelectGenerator.cs" />
     <Compile Include="Data\AvalonData.cs" />
     <Compile Include="Data\SQL\UpdateGenerator.cs" />
+    <Compile Include="Repository\AvalonDataRepositoryBase.cs" />
     <Compile Include="Repository\IRepository.cs" />
     <Compile Include="Locator.cs" />
     <Compile Include="Abstraction\ITabManager.cs" />

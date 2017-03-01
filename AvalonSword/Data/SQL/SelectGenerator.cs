@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Text;
 
 namespace Ayx.AvalonSword.Data
@@ -81,6 +82,28 @@ namespace Ayx.AvalonSword.Data
             return this;
         }
 
+        public IEnumerable<T> Go<T>(object parameters = null, IDbTransaction transaction = null)
+        {
+            return Go<T>(Connection, parameters, transaction);
+        }
+
+        public IEnumerable<T> Go<T>(IDbConnection connection, object parameters = null, IDbTransaction transaction = null)
+        {
+            var sql = GetSQL();
+            return SqlExecuter.Execute<T>(sql, connection, parameters, transaction);
+        }
+
+        public IEnumerable<dynamic> GoDynamic(object parameters = null, IDbTransaction transaction = null)
+        {
+            return GoDynamic(Connection, parameters, transaction);
+        }
+
+        public IEnumerable<dynamic> GoDynamic(IDbConnection connection, object parameters = null, IDbTransaction transaction = null)
+        {
+            var sql = GetSQL();
+            return SqlExecuter.Execute(sql, connection, parameters, transaction);
+        }
+
         private string GetWherePart()
         {
             if (string.IsNullOrEmpty(where))
@@ -88,6 +111,7 @@ namespace Ayx.AvalonSword.Data
 
             return $" {where}";
         }
+
         private string GetLimitPart()
         {
             if (limit < 0)
