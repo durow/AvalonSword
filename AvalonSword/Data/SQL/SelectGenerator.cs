@@ -21,19 +21,19 @@ namespace Ayx.AvalonSword.Data
 
         public SelectGenerator(string tableName)
         {
-            if (string.IsNullOrEmpty(tableName))
-                throw new Exception("table name can't be null");
-
             TableName = tableName;
         }
 
         protected override string GetKey()
         {
-            return verb + TableName + fields + GetJoinString() + top + limit;
+            return verb + TableName + fields + GetJoinString() + where + top + limit;
         }
 
         protected override string GenerateSQL()
         {
+            if (string.IsNullOrEmpty(TableName))
+                throw new DataException("TableName can't be empty");
+
             return $"SELECT{GetTopString()} {fields} FROM {TableName}{GetJoinPart()}{GetWherePart()}{GetLimitPart()}";
         }
 
@@ -109,7 +109,7 @@ namespace Ayx.AvalonSword.Data
             if (string.IsNullOrEmpty(where))
                 return string.Empty;
 
-            return $" {where}";
+            return $" WHERE {where}";
         }
 
         private string GetLimitPart()
@@ -128,7 +128,14 @@ namespace Ayx.AvalonSword.Data
             var result = new StringBuilder();
             foreach (var item in join)
             {
-                result.Append($" JOIN {item.Key} ON {item.Value}");
+                if (string.IsNullOrEmpty(item.Value))
+                    throw new Exception("ON part is empty");
+
+                var on = item.Value.Trim().Split('=');
+                if(on.Length == 1)
+                    result.Append($" JOIN {item.Key} ON {TableName}.{item.Value}={item.Key}.{item.Value}");
+                else
+                    result.Append($" JOIN {item.Key} ON {TableName}.{on[0]}={item.Key}.{on[1]}");
             }
             return result.ToString();
         }

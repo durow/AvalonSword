@@ -6,8 +6,8 @@ namespace Ayx.AvalonSword.Data
     public abstract class SqlGenerator
     {
         public string TableName { get; set; }
-        protected static Dictionary<string, string> SqlCache = new Dictionary<string, string>();
-        protected static Dictionary<string, ObjectMapping> OM = new Dictionary<string, ObjectMapping>();
+        public static Dictionary<string, string> SqlCache = new Dictionary<string, string>();
+        public static Dictionary<string, ObjectMapping> OM = new Dictionary<string, ObjectMapping>();
         public ISqlExecuter SqlExecuter { get; set; }
         public IDbConnection Connection { get; set; }
 
