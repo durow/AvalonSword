@@ -14,8 +14,8 @@ namespace Ayx.AvalonSword.Repository
         {
             var p = CreateParameter(key, value);
             return Data
-                .DeleteFrom<T>()
-                .Where($"{key}=@{key}")
+                .Delete<T>()
+                .Key(key)
                 .Go(p);
         }
 
@@ -63,7 +63,7 @@ namespace Ayx.AvalonSword.Repository
 
         public int Clear()
         {
-            return Data.DeleteFrom<T>().Go(null);
+            return Data.Delete<T>(null).Go();
         }
 
         protected dynamic CreateParameter(string key, object value)

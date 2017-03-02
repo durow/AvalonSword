@@ -31,7 +31,7 @@ namespace Ayx.AvalonSword.Data
 
         protected override string GetKey()
         {
-            return verb + TableName + fields + where + except;
+            return verb + TableName + key + fields + where + except;
         }
 
         public UpdateGenerator Set(string fields)

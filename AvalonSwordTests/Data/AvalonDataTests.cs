@@ -102,6 +102,22 @@ namespace Ayx.AvalonSword.Data.Tests
             var expected = @"INSERT INTO TestData(IntProperty,StringProperty,DateTimeProperty) VALUES(@IntProperty,@StringProperty,@DateTimeProperty)";
             Assert.AreEqual(expected, test);
         }
+
+        [TestMethod()]
+        public void DeleteTest()
+        {
+            var data = new AvalonData(null);
+            var item = new TestData();
+
+            var test = data.Delete(item).Key("ID").GetSQL();
+            var expected = @"DELETE FROM TestData WHERE ID=@ID";
+            Assert.AreEqual(expected, test);
+
+            var test2 = data.Delete().From("TestTable").Where("ID>@ID").GetSQL();
+            var expected2 = @"DELETE FROM TestTable WHERE ID>@ID";
+            Assert.AreEqual(expected2, test2);
+
+        }
     }
 
     class TestData

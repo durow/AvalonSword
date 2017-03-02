@@ -57,16 +57,17 @@ namespace Ayx.AvalonSword.Data
             .SetList(itemList);
         }
 
-        public DeleteGenerator DeleteFrom(string tableName)
+        public DeleteGenerator Delete()
         {
-            return new DeleteGenerator(tableName)
+            return new DeleteGenerator()
             { SqlExecuter = sqlExecuter };
         }
 
-        public DeleteGenerator DeleteFrom<T>()
+        public DeleteGenerator Delete<T>(T item = null) where T : class
         {
-            return new DeleteGenerator(typeof(T).Name)
-            { SqlExecuter = sqlExecuter };
+            return new DeleteGenerator(item)
+            { SqlExecuter = sqlExecuter }
+            .From(typeof(T).Name);
         }
     }
 }

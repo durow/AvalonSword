@@ -29,8 +29,6 @@ namespace Ayx.AvalonSword.Data
         protected override string GetKey()
         {
             var key = verb + TableName + fields + except;
-            if (param != null)
-                key += param.GetType().Name;
 
             return key;
         }
