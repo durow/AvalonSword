@@ -93,9 +93,12 @@
     <Compile Include="MVVM\ViewModelBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BindedTabManager.cs" />
+    <Compile Include="Serialization\IJson.cs" />
     <Compile Include="UserAuthentication.cs" />
     <Compile Include="Utilities\AttributeHelper.cs" />
     <Compile Include="ViewManager.cs" />
+    <Compile Include="WebService\IWebAPI.cs" />
+    <Compile Include="WebService\WebAPI.cs" />
     <Compile Include="XmlConfig.cs" />
   </ItemGroup>
   <ItemGroup />
