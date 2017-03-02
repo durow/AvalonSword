@@ -12,6 +12,7 @@ namespace Ayx.AvalonSword.Data
         private string where;
         private object entity;
         private string except;
+        private string key;
 
         public UpdateGenerator(string tableName, object entity = null)
         {
@@ -25,7 +26,7 @@ namespace Ayx.AvalonSword.Data
         protected override string GenerateSQL()
         {
             var set = CreateSet();
-            return $"UPDATE {TableName} SET {set} {where}";
+            return $"UPDATE {TableName} SET {set}{GetWherePart()}";
         }
 
         protected override string GetKey()
@@ -39,6 +40,12 @@ namespace Ayx.AvalonSword.Data
                 throw new Exception("fields can't be null");
 
             this.fields = fields;
+            return this;
+        }
+
+        public UpdateGenerator Key(string keyField)
+        {
+            this.key = keyField;
             return this;
         }
 
@@ -86,8 +93,12 @@ namespace Ayx.AvalonSword.Data
 
         private string CreateSetFromFields()
         {
-            var fieldList = fields.Trim().Split(',');
-            for (int i = 0; i < fieldList.Length; i++)
+            var fieldList = new List<string>();
+
+            if (!string.IsNullOrEmpty(fields))
+                fieldList.AddRange(fields.Trim().Split(','));
+
+            for (int i = 0; i < fieldList.Count; i++)
             {
                 fieldList[i] = UpdateFieldFormat(fieldList[i]);
             }
@@ -98,7 +109,15 @@ namespace Ayx.AvalonSword.Data
         private string CreateSetFromEntity()
         {
             var result = new List<string>();
-            var exceptList = except.Trim().Split(',');
+
+            List<string> exceptList = new List<string>();
+
+            if (!string.IsNullOrEmpty(except))
+                exceptList.AddRange(except.Trim().Split(','));
+
+            if (!string.IsNullOrEmpty(key))
+                exceptList.Add(key);
+
             var type = entity.GetType();
             foreach (var property in type.GetProperties())
             {
@@ -107,6 +126,18 @@ namespace Ayx.AvalonSword.Data
                 result.Add(UpdateFieldFormat(property.Name));
             }
             return string.Join(",", result);
+        }
+
+        private string GetWherePart()
+        {
+            if (string.IsNullOrEmpty(where) && string.IsNullOrEmpty(key))
+                return string.Empty;
+            else if (string.IsNullOrEmpty(key))
+                return $" WHERE {where}";
+            else if (string.IsNullOrEmpty(where))
+                return $" WHERE {key}=@{key}";
+            else
+                return $" WHERE {key}=@{key} AND {where}";
         }
     }
 }

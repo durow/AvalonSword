@@ -14,22 +14,16 @@ namespace Ayx.AvalonSword.Data
         private object param;
         private IEnumerable<object> paramList;
 
+        internal InsertGenerator()
+        { }
+
         public InsertGenerator(object item)
         {
             if (item == null)
                 throw new NullReferenceException("item can't be null");
+
             param = item;
             TableName = item.GetType().Name;
-        }
-
-        public InsertGenerator(IEnumerable<object> list)
-        {
-            if (list.Count() == 0)
-                throw new Exception("list count must > 0");
-
-            param = list.FirstOrDefault();
-            paramList = list;
-            TableName = param.GetType().Name;
         }
 
         protected override string GetKey()
@@ -39,6 +33,18 @@ namespace Ayx.AvalonSword.Data
                 key += param.GetType().Name;
 
             return key;
+        }
+
+        public InsertGenerator SetList<T>(IEnumerable<T> list)
+        {
+            if (list.Count() == 0)
+                throw new Exception("list count must > 0");
+
+            param = list.FirstOrDefault();
+            paramList = list as IEnumerable<object>;
+            TableName = param.GetType().Name;
+
+            return this;
         }
 
         public InsertGenerator Into(string tableName)

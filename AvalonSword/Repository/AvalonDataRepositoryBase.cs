@@ -41,7 +41,7 @@ namespace Ayx.AvalonSword.Repository
 
         public virtual int Insert(IEnumerable<T> entityList)
         {
-            return Data.Insert<T>(entityList).Go();
+            return Data.InsertList<T>(entityList).Go();
         }
 
         public virtual int Update(T entity, string keyField) 

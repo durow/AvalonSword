@@ -31,6 +31,9 @@ namespace Ayx.AvalonSword.Data
 
         public UpdateGenerator Update<T>(T item = null) where T : class
         {
+            if (item is string)
+                return Update(item as string, null);
+
             return new UpdateGenerator(typeof(T).Name, item)
             { SqlExecuter = sqlExecuter };
         }
@@ -41,16 +44,17 @@ namespace Ayx.AvalonSword.Data
             { SqlExecuter = sqlExecuter };
         }
 
-        public InsertGenerator Insert<T>(T entity)
+        public InsertGenerator Insert<T>(T entity) where T:class
         {
             return new InsertGenerator(entity)
             { SqlExecuter = sqlExecuter };
         }
 
-        public InsertGenerator Insert<T>(IEnumerable<T> itemList)
+        public InsertGenerator InsertList<T>(IEnumerable<T> itemList)
         {
-            return new InsertGenerator(itemList)
-            { SqlExecuter = sqlExecuter };
+            return new InsertGenerator()
+            { SqlExecuter = sqlExecuter }
+            .SetList(itemList);
         }
 
         public DeleteGenerator DeleteFrom(string tableName)
