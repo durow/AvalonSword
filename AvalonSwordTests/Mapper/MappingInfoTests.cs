@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Fuck.Foo.Bar;
+using System.Diagnostics;
 
 namespace Ayx.AvalonSword.Mapper.Tests
 {
@@ -33,6 +35,30 @@ namespace Ayx.AvalonSword.Mapper.Tests
 
             Assert.AreEqual(10, test2.IntTest);
             Assert.IsTrue(string.IsNullOrEmpty(test2.StringTest));
+        }
+
+        [TestMethod]
+        public void ReflectionTest()
+        {
+            var logger = new TestLogger();
+            Console.WriteLine(logger.NameSpace);
+        }
+    }
+}
+
+namespace Fuck.Foo.Bar
+{
+    public class TestLogger
+    {
+        public string NameSpace { get; set; }
+        public string MethodName { get; set; }
+
+        public TestLogger()
+        {
+            var ss = new StackTrace(true);
+            var m = ss.GetFrame(1).GetMethod();
+            NameSpace = m.DeclaringType.FullName;
+            MethodName = m.Name;
         }
     }
 }

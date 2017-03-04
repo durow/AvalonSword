@@ -67,6 +67,15 @@
     <Compile Include="Data\SQL\SelectGenerator.cs" />
     <Compile Include="Data\AvalonData.cs" />
     <Compile Include="Data\SQL\UpdateGenerator.cs" />
+    <Compile Include="Logger\AvalonLogger.cs" />
+    <Compile Include="Logger\ConsoleLogger.cs" />
+    <Compile Include="Logger\DataBaseLgger.cs" />
+    <Compile Include="Logger\FileLogger.cs" />
+    <Compile Include="Logger\ILogWriter.cs" />
+    <Compile Include="Logger\LogInfo.cs" />
+    <Compile Include="Logger\LoggerQueue.cs" />
+    <Compile Include="Logger\LogLevel.cs" />
+    <Compile Include="Logger\LogWriterBase.cs" />
     <Compile Include="Repository\AvalonDataRepositoryBase.cs" />
     <Compile Include="Repository\IRepository.cs" />
     <Compile Include="Locator.cs" />
