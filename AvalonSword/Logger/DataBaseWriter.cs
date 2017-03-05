@@ -6,13 +6,12 @@ using System.Text;
 
 namespace Ayx.AvalonSword.Logger
 {
-    public class DataBaseLgger:LogWriterBase
+    public class DataBaseWriter:LogWriterBase
     {
         private IDbConnection dbConn;
         private IDbCommand cmd;
-        private IDbTransaction transaction;
 
-        public DataBaseLgger(IDbConnection connection)
+        public DataBaseWriter(IDbConnection connection)
         {
             dbConn = connection;
             cmd = CreateCommand();
@@ -20,13 +19,8 @@ namespace Ayx.AvalonSword.Logger
 
         public override void WriteLog(LogInfo logInfo)
         {
-            if(transaction == null)
-            {
                 if (dbConn.State != ConnectionState.Open)
                     dbConn.Open();
-                transaction = dbConn.BeginTransaction();
-                cmd.Transaction = transaction;
-            }
 
             cmd.Parameters["@LogDateTime"] = logInfo.LogDateTime.ToString(DateTimeFormat);
             cmd.Parameters["@LogLevel"] = logInfo.LogLevel.ToString();
@@ -40,20 +34,12 @@ namespace Ayx.AvalonSword.Logger
             }
             catch (Exception)
             {
-                transaction.Rollback();
-                dbConn.Close();
                 throw;
             }
-        }
-
-        private void Commit()
-        {
-            if (transaction == null)
-                return;
-
-            transaction.Commit();
-            dbConn.Close();
-            transaction = null;
+            finally
+            {
+                dbConn.Close();
+            }
         }
 
         private void CheckLogTable()

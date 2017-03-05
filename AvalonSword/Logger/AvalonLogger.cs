@@ -11,36 +11,13 @@ namespace Ayx.AvalonSword.Logger
 {
     public class AvalonLogger : ILogger
     {
-        private static ConcurrentQueue<LogInfo> logQueue = new ConcurrentQueue<LogInfo>();
-        private static List<ILogWriter> logWriters = new List<ILogWriter>();
+        private ILogWriter logWriter;
 
-        static AvalonLogger()
+        public AvalonLogger(ILogWriter logWriter)
         {
-            Task.Factory.StartNew(() =>
-            {
-                while (true)
-                {
-                    LogInfo log;
-
-                    while (logQueue.TryDequeue(out log))
-                    {
-                        foreach (var writer in logWriters)
-                        {
-                            writer.TryToWriteLog(log);
-                        }
-                    }
-
-                    Thread.Sleep(500);
-                }
-            });
+            this.logWriter = logWriter;
         }
 
-        public static ConsoleLogger CreateConsoleLogger()
-        {
-            var logger = new ConsoleLogger();
-            logWriters.Add(logger);
-            return logger;
-        }
         public void Crash(string text)
         {
             throw new NotImplementedException();

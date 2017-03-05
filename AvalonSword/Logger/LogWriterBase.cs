@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Ayx.AvalonSword.Logger
 {
-    public abstract class LogWriterBase : ILogWriter
+    public abstract class LogWriterBase:ILogWriter
     {
         public string DateTimeFormat { get; private set; } = "yyyy-MM-dd HH:mm:ss.fff";
         public List<Func<LogInfo, bool>> Rules { get; private set; } = new List<Func<LogInfo, bool>>();
@@ -38,5 +36,10 @@ namespace Ayx.AvalonSword.Logger
         }
 
         public abstract void WriteLog(LogInfo logInfo);
+
+        public string GetLogString(LogInfo logInfo)
+        {
+            return $"[{logInfo.LogDateTime.ToString(DateTimeFormat)}]{logInfo.LogLevel}|{logInfo.Module}|{logInfo.Methoid}|{logInfo.LogContent}";
+        }
     }
 }
