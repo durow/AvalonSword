@@ -7,7 +7,7 @@ namespace Ayx.AvalonSword
         IEnumerable<T> GetAll();
         T GetOne(string keyField, object value);
         int Insert(T item);
-        int Insert(IEnumerable<T> entityList);
+        int InsertList(IEnumerable<T> entityList);
         int Update(T entity, string keyField);
         int UpdateField(string keyField, object keyValue, string updateField, object updateValue);
         int DeleteOne(string key, object value);

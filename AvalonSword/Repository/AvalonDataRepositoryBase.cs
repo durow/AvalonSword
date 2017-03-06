@@ -39,7 +39,7 @@ namespace Ayx.AvalonSword.Repository
             return Data.Insert(item).Go();
         }
 
-        public virtual int Insert(IEnumerable<T> entityList)
+        public virtual int InsertList(IEnumerable<T> entityList)
         {
             return Data.InsertList<T>(entityList).Go();
         }
