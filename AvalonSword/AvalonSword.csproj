@@ -106,6 +106,7 @@
     <Compile Include="Serialization\IJson.cs" />
     <Compile Include="UserAuthentication.cs" />
     <Compile Include="Utilities\AttributeHelper.cs" />
+    <Compile Include="Utilities\CommandLineExecuter.cs" />
     <Compile Include="ViewManager.cs" />
     <Compile Include="WebService\IWebAPI.cs" />
     <Compile Include="WebService\WebAPI.cs" />
