@@ -52,6 +52,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Data\AvalonDataTests.cs" />
+    <Compile Include="EventBusTests.cs" />
     <Compile Include="IoC\AyxContainerTests.cs" />
     <Compile Include="Mapper\AvalonMapperTests.cs" />
     <Compile Include="Mapper\MappingInfoTests.cs" />

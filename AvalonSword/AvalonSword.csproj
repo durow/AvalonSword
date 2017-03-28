@@ -67,6 +67,8 @@
     <Compile Include="Data\SQL\SelectGenerator.cs" />
     <Compile Include="Data\AvalonData.cs" />
     <Compile Include="Data\SQL\UpdateGenerator.cs" />
+    <Compile Include="EventBus.cs" />
+    <Compile Include="IEventBus.cs" />
     <Compile Include="Logger\AvalonLogger.cs" />
     <Compile Include="Logger\ConsoleWriter.cs" />
     <Compile Include="Logger\DataBaseWriter.cs" />
